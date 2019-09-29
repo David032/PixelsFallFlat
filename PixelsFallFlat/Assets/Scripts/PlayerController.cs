@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 9.81f;
+    public Sprite basePlayer;
+    public Sprite armedPlayer;
 
     Rigidbody2D playerBody;
+    bool armsOut = false;
 
-    // Start is called before the first frame update
     void Start()
     {
+        GetComponent<SpriteRenderer>().sprite = basePlayer;
+        GetComponent<BoxCollider2D>().enabled = false;
+        
         playerBody = GetComponent<Rigidbody2D>();
     }
 
@@ -27,23 +31,43 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward);
         }
 
-        //transform.Translate(direction / 50);
-        playerBody.velocity = direction;
-        
+        playerBody.velocity = direction;       
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        ArmControl();
+
+        if (armsOut)
+        {
+            GetComponent<BoxCollider2D>().enabled = true;
+        }
+        else if (!armsOut)
+        {
+            GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
+    void ArmControl() 
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GetComponent<SpriteRenderer>().sprite = armedPlayer;
+            armsOut = true;
+        }
+        else if (Input.GetButtonUp("Fire1"))
+        {
+            GetComponent<SpriteRenderer>().sprite = basePlayer;
+            armsOut = false;
+            this.gameObject.GetComponentInChildren<Transform>().parent = null;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Movable")
+        if (collision.gameObject.tag == "Movable")
         {
-            collision.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            collision.gameObject.transform.parent.SetParent(this.transform);
+            collision.transform.SetParent(this.transform);
         }
     }
 }

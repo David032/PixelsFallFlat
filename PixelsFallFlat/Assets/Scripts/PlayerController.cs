@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Movable")
         {
             collision.transform.SetParent(this.transform);
+            collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
         }
     }
 }

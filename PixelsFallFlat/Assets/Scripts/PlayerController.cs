@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D playerBody;
     bool armsOut = false;
     public float speed = 2;
+    GameObject grabbed;
 
     private Vector2 playerVelocity;
 
@@ -65,7 +66,9 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = basePlayer;
             armsOut = false;
-            this.gameObject.GetComponentInChildren<Transform>().parent = null;
+            grabbed.transform.SetParent(null);
+            grabbed = null;
+
         }
     }
 
@@ -75,6 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             collision.transform.SetParent(this.transform);
             collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+            grabbed = collision.gameObject;
         }
     }
 }

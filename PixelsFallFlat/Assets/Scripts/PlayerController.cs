@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D playerBody;
     bool armsOut = false;
+    public float speed = 2;
+
+    private Vector2 playerVelocity;
 
     void Start()
     {
@@ -31,7 +34,10 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward);
         }
 
-        playerBody.velocity = direction;       
+
+        playerVelocity = direction.normalized * speed;
+
+        playerBody.MovePosition(playerBody.position + playerVelocity * Time.fixedDeltaTime);
     }
 
     void Update()
@@ -68,6 +74,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Movable")
         {
             collision.transform.SetParent(this.transform);
+            collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
         }
     }
 }

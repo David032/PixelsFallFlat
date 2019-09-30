@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum Player
+    {
+        Player1,
+        Player2
+    }
+    
     public Sprite basePlayer;
     public Sprite armedPlayer;
+    public Player thisPlayer = Player.Player1;
 
     Rigidbody2D playerBody;
     bool armsOut = false;
     public float speed = 2;
     GameObject grabbed;
+    Vector2 playerVelocity;
 
-    private Vector2 playerVelocity;
+    string hAxis = "Horizontal";
+    string vAxis = "Vertical";
 
     void Start()
     {
@@ -20,12 +29,18 @@ public class PlayerController : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         
         playerBody = GetComponent<Rigidbody2D>();
+
+        if (thisPlayer == Player.Player2)
+        {
+            hAxis = "P2Horizontal";
+            vAxis = "P2Vertical";
+        }
     }
 
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");        
+        float h = Input.GetAxis(hAxis);
+        float v = Input.GetAxis(vAxis);        
 
         Vector2 direction = new Vector2(h, v);
 
@@ -35,9 +50,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward);
         }
 
-
         playerVelocity = direction.normalized * speed;
-
         playerBody.MovePosition(playerBody.position + playerVelocity * Time.fixedDeltaTime);
     }
 
@@ -57,19 +70,45 @@ public class PlayerController : MonoBehaviour
 
     void ArmControl() 
     {
-        if (Input.GetButtonDown("Fire1"))
+        switch (thisPlayer)
         {
-            GetComponent<SpriteRenderer>().sprite = armedPlayer;
-            armsOut = true;
+            case Player.Player1:
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    GetComponent<SpriteRenderer>().sprite = armedPlayer;
+                    armsOut = true;
+                }
+                else if (Input.GetButtonUp("Fire1"))
+                {
+                    GetComponent<SpriteRenderer>().sprite = basePlayer;
+                    armsOut = false;
+                    grabbed.transform.SetParent(null);
+                    grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+                    grabbed = null;
+                }
+                break;
+            case Player.Player2:
+                if (Input.GetButtonDown("P2Grab"))
+                {
+                    GetComponent<SpriteRenderer>().sprite = armedPlayer;
+                    armsOut = true;
+                }
+                else if (Input.GetButtonUp("P2Grab"))
+                {
+                    GetComponent<SpriteRenderer>().sprite = basePlayer;
+                    armsOut = false;
+                    grabbed.transform.SetParent(null);
+                    grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+                    grabbed = null;
+                }
+                break;
+           
+            default:
+                break;
         }
-        else if (Input.GetButtonUp("Fire1"))
-        {
-            GetComponent<SpriteRenderer>().sprite = basePlayer;
-            armsOut = false;
-            grabbed.transform.SetParent(null);
-            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
-            grabbed = null;
-        }
+
+
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)

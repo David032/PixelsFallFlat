@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = basePlayer;
             armsOut = false;
             grabbed.transform.SetParent(null);
+            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbed = null;
-
         }
     }
 

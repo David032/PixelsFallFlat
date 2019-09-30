@@ -8,20 +8,22 @@ public class PlayerController : MonoBehaviour
     {
         Player1,
         Player2
-    }
-    
+    }    
     public Sprite basePlayer;
     public Sprite armedPlayer;
     public Player thisPlayer = Player.Player1;
 
     Rigidbody2D playerBody;
-    bool armsOut = false;
     public float speed = 2;
-    GameObject grabbed;
     Vector2 playerVelocity;
 
     string hAxis = "Horizontal";
     string vAxis = "Vertical";
+
+    bool armsOut = false;
+    GameObject grabbed = null;
+
+    float pWeight = 0.0f;
 
     void Start()
     {
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
             hAxis = "P2Horizontal";
             vAxis = "P2Vertical";
         }
+
+        pWeight = GetComponent<Rigidbody2D>().mass;
     }
 
     void FixedUpdate()
@@ -44,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 direction = new Vector2(h, v);
 
-        if (direction != Vector2.zero)
+        if (direction != Vector2.zero) ///Add '&& grabbed == null' here to disable rotation whilst holding an object, trying to work out how to give better rotation
         {
             float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward);
@@ -83,10 +87,13 @@ public class PlayerController : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
                     grabbed.transform.SetParent(null);
+                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
+                    GetComponent<Rigidbody2D>().mass = pWeight;
                 }
                 break;
+
             case Player.Player2:
                 if (Input.GetButtonDown("P2Grab"))
                 {
@@ -98,8 +105,10 @@ public class PlayerController : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
                     grabbed.transform.SetParent(null);
+                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
+                    GetComponent<Rigidbody2D>().mass = pWeight;
                 }
                 break;
            
@@ -117,7 +126,9 @@ public class PlayerController : MonoBehaviour
         {
             collision.transform.SetParent(this.transform);
             collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
             grabbed = collision.gameObject;
+            GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
         }
     }
 }

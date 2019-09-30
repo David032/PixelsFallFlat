@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 812368319}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -988,6 +988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePlayer: {fileID: 21300000, guid: ab8249dcfb3dc2d4bb6f3baa7540d127, type: 3}
   armedPlayer: {fileID: 21300000, guid: 4b8f40f9880669748b3e12d162ffe16c, type: 3}
+  speed: 2
 --- !u!1 &841652401
 GameObject:
   m_ObjectHideFlags: 0

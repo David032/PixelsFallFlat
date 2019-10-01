@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         float h = Input.GetAxis(hAxis);
         float v = Input.GetAxis(vAxis);
-        //speed = pWeight / GetComponent<Rigidbody2D>().mass;
+        speed = pWeight / GetComponent<Rigidbody2D>().mass;
 
         Vector2 direction = new Vector2(h, v);
 

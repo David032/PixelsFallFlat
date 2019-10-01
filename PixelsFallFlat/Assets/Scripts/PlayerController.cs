@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
                     armsOut = false;
                     grabbed.transform.SetParent(null);
                     //grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
                 }
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
                     armsOut = false;
                     grabbed.transform.SetParent(null);
                     //grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
                 }
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Movable")
         {
             collision.transform.SetParent(this.transform);
-            collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+            grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             //collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
             grabbed = collision.gameObject;
             GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;

@@ -12,11 +12,12 @@ public class PlayerController : MonoBehaviour
     public Sprite basePlayer;
     public Sprite armedPlayer;
     public Player thisPlayer = Player.Player1;
+    public GameObject spawnPoint;
 
     Rigidbody2D playerBody;
 
-    public float baseSpeed = 2;
-    float speed;
+    public float speed = 2;
+    //float speed;
     Vector2 playerVelocity;
 
     string hAxis = "Horizontal";
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
-                    speed = baseSpeed;
+                    //speed = baseSpeed;
                 }
                 break;
 
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
-                    speed = baseSpeed;
+                    //speed = baseSpeed;
                 }
                 break;
            
@@ -137,14 +138,44 @@ public class PlayerController : MonoBehaviour
             grabbed = collision.gameObject;
             GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
 
-            if (rigidbody.mass > maxCarryWeight)
-            {
-                speed = 0;
-            }
-            else
-            {
-                speed = baseSpeed - (baseSpeed * 0.75f) * (1 - (rigidbody.mass / maxCarryWeight));
-            }
+            //if (rigidbody.mass > maxCarryWeight)
+            //{
+            //    speed = 0;
+            //}
+            //else
+            //{
+            //    speed = baseSpeed - (baseSpeed * 0.75f) * (1 - (rigidbody.mass / maxCarryWeight));
+            //}
         }
+
+        if (collision.gameObject.tag == "Void")
+        {
+            speed = 0;
+            Debug.Log("dead");
+            StartCoroutine_Auto(RespawnCountDown(2.0f));
+        }
+    }
+    void Respawn()
+    {
+        Debug.Log("respawn");
+        if (grabbed != null)
+        {
+            grabbed.transform.SetParent(null);
+            grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+            grabbed.GetComponent<RespawnObject>().Respawn();
+            grabbed = null;
+        }
+        transform.position = spawnPoint.transform.position;
+        transform.rotation = spawnPoint.transform.rotation;
+        speed = 1;
+        //speed = baseSpeed;
+    }
+
+    IEnumerator RespawnCountDown(float waitTime)
+    {
+        Debug.Log("respawning");
+        yield return new WaitForSeconds(waitTime);
+        Respawn();
     }
 }

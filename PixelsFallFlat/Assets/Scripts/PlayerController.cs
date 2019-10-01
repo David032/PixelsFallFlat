@@ -90,12 +90,12 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetButtonUp("Fire1"))
                 {
-                    GetComponent<SpriteRenderer>().sprite = basePlayer;
-                    armsOut = false;
-                    GetComponent<Rigidbody2D>().mass = pWeight;
-                    grabbed.transform.SetParent(null);
-                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    GetComponent<SpriteRenderer>().sprite = basePlayer;
+                    armsOut = false;
+                    GetComponent<Rigidbody2D>().mass = pWeight;                    
+                    grabbed.transform.SetParent(null);
+                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                     grabbed = null;       
                 }
                 break;
@@ -108,15 +108,16 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetButtonUp("P2Grab"))
                 {
-                    GetComponent<SpriteRenderer>().sprite = basePlayer;
-                    armsOut = false;
-                    GetComponent<Rigidbody2D>().mass = pWeight;
-                    if (grabbed)
-                    {
-                        grabbed.transform.SetParent(null);
-                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                        grabbed = null;
+                    GetComponent<SpriteRenderer>().sprite = basePlayer;
+                    armsOut = false;
+                    GetComponent<Rigidbody2D>().mass = pWeight;
+
+                    if (grabbed)
+                    {
+                        grabbed.transform.SetParent(null);
+                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                        grabbed = null;
                     }
                 }
                 break;
@@ -139,34 +140,35 @@ public class PlayerController : MonoBehaviour
             grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         }
 
+        ///THIS WON'T WORK AS IS - THE TRIGGER VOLUME IS ONLY ACTIVE WHEN THE ARMS ARE OUT
         if (collision.gameObject.tag == "Void")
         {
             speed = 0;
             Debug.Log("dead");
-            StartCoroutine_Auto(RespawnCountDown(2.0f));
+            StartCoroutine(RespawnCountDown(2.0f));
         }
     }
-    void Respawn()
-    {
-        Debug.Log("respawn");
-        if (grabbed != null)
-        {
-            grabbed.transform.SetParent(null);
-            grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
-            grabbed.GetComponent<RespawnObject>().Respawn();
-            grabbed = null;
+    void Respawn()
+    {
+        Debug.Log("respawn");
+        if (grabbed != null)
+        {
+            grabbed.transform.SetParent(null);
+            grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+            grabbed.GetComponent<RespawnObject>().Respawn();
+            grabbed = null;
         }
-        transform.position = spawnPoint.transform.position;
-        transform.rotation = spawnPoint.transform.rotation;
-        speed = 1;
-        //speed = baseSpeed;
+        transform.position = spawnPoint.transform.position;
+        transform.rotation = spawnPoint.transform.rotation;
+        speed = 1;
+        //speed = baseSpeed;
     }
 
-    IEnumerator RespawnCountDown(float waitTime)
-    {
-        Debug.Log("respawning");
-        yield return new WaitForSeconds(waitTime);
-        Respawn();
+    IEnumerator RespawnCountDown(float waitTime)
+    {
+        Debug.Log("respawning");
+        yield return new WaitForSeconds(waitTime);
+        Respawn();
     }
 }

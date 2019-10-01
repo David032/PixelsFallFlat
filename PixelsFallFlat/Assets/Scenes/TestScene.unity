@@ -936,7 +936,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 160, y: 120}
+    oldSize: {x: 86.5, y: 78.5}
     newSize: {x: 160, y: 120}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -962,7 +962,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 160, y: 120}
+    oldSize: {x: 86.5, y: 78.5}
     newSize: {x: 160, y: 120}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -988,7 +988,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 160, y: 120}
+    oldSize: {x: 86.5, y: 78.5}
     newSize: {x: 160, y: 120}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1014,7 +1014,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 160, y: 120}
+    oldSize: {x: 86.5, y: 78.5}
     newSize: {x: 160, y: 120}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1787,7 +1787,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d83b536cff43a849a8177a1e61bd967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: SampleScene
+  room: {fileID: 0}
+  player1_pos: {fileID: 0}
+  player2_pos: {fileID: 0}
 --- !u!61 &1044768231
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1883,7 +1885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1074473095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,6 +1901,7 @@ MonoBehaviour:
   basePlayer: {fileID: 21300000, guid: ab8249dcfb3dc2d4bb6f3baa7540d127, type: 3}
   armedPlayer: {fileID: 21300000, guid: 4b8f40f9880669748b3e12d162ffe16c, type: 3}
   thisPlayer: 1
+  spawnPoint: {fileID: 0}
   speed: 2
   playerVelocity: {x: 0, y: 0}
 --- !u!50 &1074473096

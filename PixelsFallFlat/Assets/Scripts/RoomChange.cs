@@ -11,12 +11,12 @@ public class RoomChange : MonoBehaviour
     // Start is called before the first frame update
 
     void OnTriggerEnter2D(Collider2D other)
-        {
+    {
         if (other.GetComponent<PlayerController>())
         {
             StartCoroutine(LoadRoom());
         }
-        }
+    }
 
     IEnumerator LoadRoom()
     {

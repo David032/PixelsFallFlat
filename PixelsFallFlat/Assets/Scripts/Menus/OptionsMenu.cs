@@ -6,6 +6,8 @@ public class OptionsMenu : MonoBehaviour
 {
     private GameObject AudioManager;
 
+    private bool music_state;
+
     private void Start()
     {
         AudioManager = GameObject.FindGameObjectWithTag("AudioManager");

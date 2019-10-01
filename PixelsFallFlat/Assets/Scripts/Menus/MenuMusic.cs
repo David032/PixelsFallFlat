@@ -51,4 +51,9 @@ public class MenuMusic : MonoBehaviour
         }
     }
 
+    public bool GetMusicState()
+    {
+        return current_state;
+    }
+
 }

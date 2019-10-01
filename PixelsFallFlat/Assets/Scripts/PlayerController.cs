@@ -9,19 +9,21 @@ public class PlayerController : MonoBehaviour
         Player1,
         Player2
     }    
+
     public Sprite basePlayer;
     public Sprite armedPlayer;
     public Player thisPlayer = Player.Player1;
 
     Rigidbody2D playerBody;
     public float speed = 0;
-    Vector2 playerVelocity;
+    public Vector2 playerVelocity;
 
     string hAxis = "Horizontal";
     string vAxis = "Vertical";
 
     bool armsOut = false;
     GameObject grabbed = null;
+    Vector2 grabbedPosition;
 
     float pWeight = 0.0f;
 
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().sprite = basePlayer;
         GetComponent<BoxCollider2D>().enabled = false;
-        
+
         playerBody = GetComponent<Rigidbody2D>();
 
         if (thisPlayer == Player.Player2)
@@ -57,7 +59,6 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity = direction.normalized * speed;
         playerBody.MovePosition(playerBody.position + playerVelocity * Time.fixedDeltaTime);
-        grabbed.GetComponent<Rigidbody2D>().MovePosition(playerBody.position + playerVelocity * Time.fixedDeltaTime);
     }
 
     void Update()
@@ -83,16 +84,18 @@ public class PlayerController : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().sprite = armedPlayer;
                     armsOut = true;
+                    grabbed.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                    grabbed.GetComponent<Rigidbody2D>().angularVelocity = 0;
                 }
                 else if (Input.GetButtonUp("Fire1"))
                 {
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
-                    grabbed.transform.SetParent(null);
-                    //grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                    grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
+                    grabbed.transform.SetParent(null);
+                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    grabbed = null;       
                 }
                 break;
 
@@ -106,20 +109,20 @@ public class PlayerController : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
-                    grabbed.transform.SetParent(null);
-                    //grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                    grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
+                    if (grabbed)
+                    {
+                        grabbed.transform.SetParent(null);
+                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                        grabbed = null;
+                    }
                 }
                 break;
            
             default:
                 break;
         }
-
-
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -127,10 +130,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Movable")
         {
             collision.transform.SetParent(this.transform);
-            grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            //collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
+
+            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
             grabbed = collision.gameObject;
             GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
+            grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
+            grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         }
     }
 }

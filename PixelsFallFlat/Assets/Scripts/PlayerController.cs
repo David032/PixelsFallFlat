@@ -9,31 +9,30 @@ public class PlayerController : MonoBehaviour
         Player1,
         Player2
     }    
+
     public Sprite basePlayer;
     public Sprite armedPlayer;
     public Player thisPlayer = Player.Player1;
     public GameObject spawnPoint;
 
     Rigidbody2D playerBody;
-
-    public float speed = 2;
-    //float speed;
-    Vector2 playerVelocity;
+    public float speed = 0;
+    public Vector2 playerVelocity;
 
     string hAxis = "Horizontal";
     string vAxis = "Vertical";
 
     bool armsOut = false;
     GameObject grabbed = null;
+    Vector2 grabbedPosition;
 
-    public float maxCarryWeight = 100;
     float pWeight = 0.0f;
 
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = basePlayer;
         GetComponent<BoxCollider2D>().enabled = false;
-        
+
         playerBody = GetComponent<Rigidbody2D>();
 
         if (thisPlayer == Player.Player2)
@@ -48,7 +47,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float h = Input.GetAxis(hAxis);
-        float v = Input.GetAxis(vAxis);        
+        float v = Input.GetAxis(vAxis);
+        speed = pWeight / GetComponent<Rigidbody2D>().mass;
 
         Vector2 direction = new Vector2(h, v);
 
@@ -85,17 +85,18 @@ public class PlayerController : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().sprite = armedPlayer;
                     armsOut = true;
+                    grabbed.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                    grabbed.GetComponent<Rigidbody2D>().angularVelocity = 0;
                 }
                 else if (Input.GetButtonUp("Fire1"))
                 {
-                    GetComponent<SpriteRenderer>().sprite = basePlayer;
-                    armsOut = false;
-                    grabbed.transform.SetParent(null);
-                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
-                    grabbed = null;
-                    GetComponent<Rigidbody2D>().mass = pWeight;
-                    //speed = baseSpeed;
+                    GetComponent<SpriteRenderer>().sprite = basePlayer;
+                    armsOut = false;
+                    GetComponent<Rigidbody2D>().mass = pWeight;
+                    grabbed.transform.SetParent(null);
+                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    grabbed = null;       
                 }
                 break;
 
@@ -107,75 +108,65 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetButtonUp("P2Grab"))
                 {
-                    GetComponent<SpriteRenderer>().sprite = basePlayer;
-                    armsOut = false;
-                    grabbed.transform.SetParent(null);
-                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
-                    grabbed = null;
-                    GetComponent<Rigidbody2D>().mass = pWeight;
-                    //speed = baseSpeed;
+                    GetComponent<SpriteRenderer>().sprite = basePlayer;
+                    armsOut = false;
+                    GetComponent<Rigidbody2D>().mass = pWeight;
+                    if (grabbed)
+                    {
+                        grabbed.transform.SetParent(null);
+                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                        grabbed = null;
+                    }
                 }
                 break;
            
             default:
                 break;
         }
-
-
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Movable")
         {
-            collision.transform.SetParent(this.transform);
+            collision.transform.SetParent(this.transform);
 
-            Rigidbody2D rigidbody = collision.transform.GetComponent<Rigidbody2D>();
-            rigidbody.isKinematic = true;
-            rigidbody.useFullKinematicContacts = true;
+            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
             grabbed = collision.gameObject;
             GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
-
-            //if (rigidbody.mass > maxCarryWeight)
-            //{
-            //    speed = 0;
-            //}
-            //else
-            //{
-            //    speed = baseSpeed - (baseSpeed * 0.75f) * (1 - (rigidbody.mass / maxCarryWeight));
-            //}
+            grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
+            grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         }
 
         if (collision.gameObject.tag == "Void")
-        {
-            speed = 0;
-            Debug.Log("dead");
-            StartCoroutine_Auto(RespawnCountDown(2.0f));
-        }
+        {
+            speed = 0;
+            Debug.Log("dead");
+            StartCoroutine_Auto(RespawnCountDown(2.0f));
+        }
     }
-    void Respawn()
-    {
-        Debug.Log("respawn");
-        if (grabbed != null)
-        {
-            grabbed.transform.SetParent(null);
-            grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
-            grabbed.GetComponent<RespawnObject>().Respawn();
-            grabbed = null;
-        }
-        transform.position = spawnPoint.transform.position;
-        transform.rotation = spawnPoint.transform.rotation;
-        speed = 1;
-        //speed = baseSpeed;
+    void Respawn()
+    {
+        Debug.Log("respawn");
+        if (grabbed != null)
+        {
+            grabbed.transform.SetParent(null);
+            grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+            grabbed.GetComponent<RespawnObject>().Respawn();
+            grabbed = null;
+        }
+        transform.position = spawnPoint.transform.position;
+        transform.rotation = spawnPoint.transform.rotation;
+        speed = 1;
+        //speed = baseSpeed;
     }
 
-    IEnumerator RespawnCountDown(float waitTime)
-    {
-        Debug.Log("respawning");
-        yield return new WaitForSeconds(waitTime);
-        Respawn();
+    IEnumerator RespawnCountDown(float waitTime)
+    {
+        Debug.Log("respawning");
+        yield return new WaitForSeconds(waitTime);
+        Respawn();
     }
 }

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public GameObject AudioManager;
+    private GameObject AudioManager;
 
     private void Start()
     {
         AudioManager = GameObject.FindGameObjectWithTag("AudioManager");
     }
-
     public void MusicEnabled()
     {
         AudioManager.GetComponent<MenuMusic>().SetNewState(true);
@@ -19,5 +18,4 @@ public class OptionsMenu : MonoBehaviour
     {
         AudioManager.GetComponent<MenuMusic>().SetNewState(false);
     }
-
 }

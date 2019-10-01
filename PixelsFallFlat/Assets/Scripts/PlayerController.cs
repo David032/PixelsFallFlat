@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D playerBody;
     bool armsOut = false;
-    public float speed = 2;
+    public float baseSpeed = 2;
+    public float maxCarryWeight = 100;
+    float speed;
 
     private Vector2 playerVelocity;
 
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = basePlayer;
             armsOut = false;
             this.gameObject.GetComponentInChildren<Transform>().parent = null;
+            speed = baseSpeed;
         }
     }
 
@@ -75,6 +78,16 @@ public class PlayerController : MonoBehaviour
         {
             collision.transform.SetParent(this.transform);
             collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+            Rigidbody2D rigidbody = collision.transform.GetComponent<Rigidbody2D>();
+            rigidbody.isKinematic = true;
+            if (rigidbody.mass > maxCarryWeight)
+            {
+                speed = 0;
+            }
+            else
+            {
+                speed = baseSpeed - (baseSpeed * 0.75f) * (1 - (rigidbody.mass / maxCarryWeight));
+            }
         }
     }
 }

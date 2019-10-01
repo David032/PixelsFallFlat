@@ -14,13 +14,9 @@ public class PlayerController : MonoBehaviour
     public Player thisPlayer = Player.Player1;
 
     Rigidbody2D playerBody;
-<<<<<<< HEAD
-    bool armsOut = false;
+
     public float baseSpeed = 2;
-    public float maxCarryWeight = 100;
     float speed;
-=======
-    public float speed = 2;
     Vector2 playerVelocity;
 
     string hAxis = "Horizontal";
@@ -28,8 +24,8 @@ public class PlayerController : MonoBehaviour
 
     bool armsOut = false;
     GameObject grabbed = null;
->>>>>>> Character
 
+    public float maxCarryWeight = 100;
     float pWeight = 0.0f;
 
     void Start()
@@ -83,12 +79,6 @@ public class PlayerController : MonoBehaviour
     {
         switch (thisPlayer)
         {
-<<<<<<< HEAD
-            GetComponent<SpriteRenderer>().sprite = basePlayer;
-            armsOut = false;
-            this.gameObject.GetComponentInChildren<Transform>().parent = null;
-            speed = baseSpeed;
-=======
             case Player.Player1:
                 if (Input.GetButtonDown("Fire1"))
                 {
@@ -104,6 +94,7 @@ public class PlayerController : MonoBehaviour
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
+                    speed = baseSpeed;
                 }
                 break;
 
@@ -122,12 +113,12 @@ public class PlayerController : MonoBehaviour
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
+                    speed = baseSpeed;
                 }
                 break;
            
             default:
                 break;
->>>>>>> Character
         }
 
 
@@ -139,10 +130,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Movable")
         {
             collision.transform.SetParent(this.transform);
-<<<<<<< HEAD
-            collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
+
             Rigidbody2D rigidbody = collision.transform.GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = true;
+            rigidbody.useFullKinematicContacts = true;
+            grabbed = collision.gameObject;
+            GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
+
             if (rigidbody.mass > maxCarryWeight)
             {
                 speed = 0;
@@ -151,12 +145,6 @@ public class PlayerController : MonoBehaviour
             {
                 speed = baseSpeed - (baseSpeed * 0.75f) * (1 - (rigidbody.mass / maxCarryWeight));
             }
-=======
-            collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
-            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
-            grabbed = collision.gameObject;
-            GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
->>>>>>> Character
         }
     }
 }

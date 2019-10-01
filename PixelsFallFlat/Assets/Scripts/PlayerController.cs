@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
     bool armsOut = false;
     GameObject grabbed = null;
 
-    float pWeight = 0.0f;
+    public float pWeight = 0.0f; ///Make this private before pushing
+    public float speedScale;
 
     void Start()
     {
@@ -44,7 +45,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float h = Input.GetAxis(hAxis);
-        float v = Input.GetAxis(vAxis);        
+        float v = Input.GetAxis(vAxis);
+        speedScale = pWeight / GetComponent<Rigidbody2D>().mass;
 
         Vector2 direction = new Vector2(h, v);
 
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerVelocity = direction.normalized * speed;
-        playerBody.MovePosition(playerBody.position + playerVelocity * Time.fixedDeltaTime);
+        playerBody.MovePosition(playerBody.position + (playerVelocity * speedScale) * Time.fixedDeltaTime);
     }
 
     void Update()
@@ -86,8 +88,7 @@ public class PlayerController : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
-                    grabbed.transform.SetParent(null);
-                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                    grabbed.transform.SetParent(null);                    
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
@@ -105,7 +106,6 @@ public class PlayerController : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
                     grabbed.transform.SetParent(null);
-                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
                     grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
                     grabbed = null;
                     GetComponent<Rigidbody2D>().mass = pWeight;
@@ -126,7 +126,6 @@ public class PlayerController : MonoBehaviour
         {
             collision.transform.SetParent(this.transform);
             collision.transform.GetComponent<Rigidbody2D>().isKinematic = true;
-            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
             grabbed = collision.gameObject;
             GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
         }

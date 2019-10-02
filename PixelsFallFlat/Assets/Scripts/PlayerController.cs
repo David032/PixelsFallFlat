@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Movable")
         {
-            if (grabbed != null)
+            if (grabbed == null)
             {
                 grabbed = collision.gameObject;
                 collision.transform.SetParent(this.transform);
@@ -154,11 +154,16 @@ public class PlayerController : MonoBehaviour
 
         ///THIS WON'T WORK AS IS - THE TRIGGER VOLUME IS ONLY ACTIVE WHEN THE ARMS ARE OUT
         if (collision.gameObject.tag == "Void")
-        {
-            speed = 0;
-            Debug.Log("dead");
-            StartCoroutine(RespawnCountDown(2.0f));
-        }
+        {
+
+            speed = 0;
+
+            Debug.Log("dead");
+
+            StartCoroutine(RespawnCountDown(2.0f));
+
+        }
+
     }
     void Respawn()
     {
@@ -170,7 +175,8 @@ public class PlayerController : MonoBehaviour
             grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbed.GetComponent<RespawnObject>().Respawn();
             grabbed = null;
-        }
+        }
+
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
         speed = 1;

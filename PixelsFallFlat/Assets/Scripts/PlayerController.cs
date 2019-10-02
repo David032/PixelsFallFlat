@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = basePlayer;
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
 
         playerBody = GetComponent<Rigidbody2D>();
 
@@ -68,15 +68,15 @@ public class PlayerController : MonoBehaviour
 
         if (armsOut)
         {
-            GetComponent<BoxCollider2D>().enabled = true;
-            GetComponent<CapsuleCollider2D>().offset = new Vector2(0,0f);
-            GetComponent<CapsuleCollider2D>().size = new Vector2(0.14f, 0.14f);
+            GetComponent<CapsuleCollider2D>().enabled = true;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0,-0.005f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.14f, 0.13f);
         }
         else if (!armsOut)
         {
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<CapsuleCollider2D>().offset = new Vector2(0f,-0.4f);
-            GetComponent<CapsuleCollider2D>().size = new Vector2(0.14f,0.065f);
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0f,-0.038f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.14f,0.065f);
         }
     }
 
@@ -96,11 +96,15 @@ public class PlayerController : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
-                    GetComponent<Rigidbody2D>().mass = pWeight;                    
-                    grabbed.transform.SetParent(null);
-                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                    grabbed = null;       
+                    GetComponent<Rigidbody2D>().mass = pWeight;
+
+                    if (grabbed)
+                    {
+                        grabbed.transform.SetParent(null);
+                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                        grabbed = null;
+                    }       
                 }
                 break;
 
@@ -135,13 +139,16 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Movable")
         {
-            collision.transform.SetParent(this.transform);
+            if (grabbed != null)
+            {
+                grabbed = collision.gameObject;
+                collision.transform.SetParent(this.transform);
+                collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
+                GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
+                grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
 
-            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
-            grabbed = collision.gameObject;
-            GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
-            grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
-            grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            }
         }
 
         ///THIS WON'T WORK AS IS - THE TRIGGER VOLUME IS ONLY ACTIVE WHEN THE ARMS ARE OUT

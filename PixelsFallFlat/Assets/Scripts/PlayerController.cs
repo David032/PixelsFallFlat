@@ -68,13 +68,15 @@ public class PlayerController : MonoBehaviour
 
         if (armsOut)
         {
-            //GetComponent<BoxCollider2D>().enabled = true;
-            //enable child box colider
+            GetComponent<BoxCollider2D>().enabled = true;
+            GetComponent<CapsuleCollider2D>().offset = new Vector2(0,0f);
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.14f, 0.14f);
         }
         else if (!armsOut)
         {
-            //GetComponent<BoxCollider2D>().enabled = false;
-            //disable child box colider
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<CapsuleCollider2D>().offset = new Vector2(0f,-0.4f);
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.14f,0.065f);
         }
     }
 

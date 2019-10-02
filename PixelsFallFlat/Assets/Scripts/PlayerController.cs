@@ -68,11 +68,13 @@ public class PlayerController : MonoBehaviour
 
         if (armsOut)
         {
-            GetComponent<BoxCollider2D>().enabled = true;
+            //GetComponent<BoxCollider2D>().enabled = true;
+            //enable child box colider
         }
         else if (!armsOut)
         {
-            GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<BoxCollider2D>().enabled = false;
+            //disable child box colider
         }
     }
 

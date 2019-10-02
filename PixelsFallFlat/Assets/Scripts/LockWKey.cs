@@ -10,7 +10,7 @@ public class LockWKey : MonoBehaviour
     public GameObject key;
     public Sprite keyLockWithKey;
 
-    void OnTriggerEnter2D(Collider2D collision)
+   void OnCollisionEnter2D(Collision2D collision)
     {
         //if (collision.gameObject.tag == "Key")
         //{

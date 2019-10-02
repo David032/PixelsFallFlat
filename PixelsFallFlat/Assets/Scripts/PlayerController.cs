@@ -137,27 +137,28 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Movable")
         {
-            collision.transform.SetParent(this.transform);
+            if (grabbed != null)
+            {
+                grabbed = collision.gameObject;
+                collision.transform.SetParent(this.transform);
 
-            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
-            grabbed = collision.gameObject;
-            GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
-            grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
-            grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
+                grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
+
+                grabbed.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
+                grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                grabbed.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                grabbed.GetComponent<Rigidbody2D>().angularVelocity = 0;
+            }
         }
 
         ///THIS WON'T WORK AS IS - THE TRIGGER VOLUME IS ONLY ACTIVE WHEN THE ARMS ARE OUT
         if (collision.gameObject.tag == "Void")
-        {
-
-            speed = 0;
-
-            Debug.Log("dead");
-
-            StartCoroutine(RespawnCountDown(2.0f));
-
-        }
-
+        {
+            speed = 0;
+            Debug.Log("dead");
+            StartCoroutine(RespawnCountDown(2.0f));
+        }
     }
     void Respawn()
     {
@@ -169,8 +170,7 @@ public class PlayerController : MonoBehaviour
             grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbed.GetComponent<RespawnObject>().Respawn();
             grabbed = null;
-        }
-
+        }
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
         speed = 1;
@@ -184,13 +184,3 @@ public class PlayerController : MonoBehaviour
         Respawn();
     }
 }
-
-            if (grabbed != null)
-            {
-                grabbed = collision.gameObject;
-                collision.transform.SetParent(this.transform);
-                collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
-                GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
-                grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
-                grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            }

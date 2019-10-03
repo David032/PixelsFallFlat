@@ -18,7 +18,7 @@ public class AxeWTree : MonoBehaviour
         if (collision.gameObject.name == "axe(Clone)" ||collision.gameObject == axe)
         {
             Debug.Log("Stuff");
-            Instantiate(trunk, transform.position + new Vector3(0.1f, 0f, 0f), new Quaternion());
+            Instantiate(trunk, transform.position + new Vector3(0.3f, 0f, 0f), new Quaternion());
             Destroy(this.gameObject);
         }
         Debug.Log("Other Stuff");

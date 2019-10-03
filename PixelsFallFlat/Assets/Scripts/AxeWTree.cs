@@ -14,9 +14,8 @@ public class AxeWTree : MonoBehaviour
     {
         if (collision.gameObject == axe)
         {
-            //Destroy(tree.gameObject);
-            //Destroy(this.gameObject);
-            //Instantiate(trunk, spawnPos.position, spawnPos.rotation);
+            Instantiate(trunk, transform.position + new Vector3(0.1f, 0f, 0f), new Quaternion());
+            Destroy(this.gameObject);
         }
     }
 }

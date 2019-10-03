@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ShovelWDirt : MonoBehaviour
 {
+
     public GameObject dirtHill;
     public GameObject shovel;
     public GameObject hiddenItem;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == shovel)
         {

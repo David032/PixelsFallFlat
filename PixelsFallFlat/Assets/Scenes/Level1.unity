@@ -15594,7 +15594,7 @@ GameObject:
   - component: {fileID: 542024611}
   m_Layer: 0
   m_Name: brick_wall (3)
-  m_TagString: Movable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53516,7 +53516,7 @@ GameObject:
   - component: {fileID: 1792538482}
   m_Layer: 0
   m_Name: brick_wall (4)
-  m_TagString: Movable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

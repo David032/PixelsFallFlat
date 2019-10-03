@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     public Player thisPlayer = Player.Player1;
     public GameObject spawnPoint;
 
-    Rigidbody2D playerBody;
-    public float speed = 0;
+    public Rigidbody2D playerBody;
+    public float speed = 1;
     public Vector2 playerVelocity;
 
     string hAxis = "Horizontal";
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = basePlayer;
-        GetComponent<CapsuleCollider2D>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
 
         playerBody = GetComponent<Rigidbody2D>();
 
@@ -54,8 +54,10 @@ public class PlayerController : MonoBehaviour
 
         if (direction != Vector2.zero) ///Add '&& grabbed == null' here to disable rotation whilst holding an object, trying to work out how to give better rotation
         {
-            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward);
+            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;          
+            transform.rotation.eulerAngles.Set(0, 0, 0);
+            //transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward);
+            transform.rotation = Quaternion.Euler(0, 0, angle * -1);
         }
 
         playerVelocity = direction.normalized * speed;
@@ -68,15 +70,15 @@ public class PlayerController : MonoBehaviour
 
         if (armsOut)
         {
-            GetComponent<CapsuleCollider2D>().enabled = true;
-            GetComponent<BoxCollider2D>().offset = new Vector2(0,-0.005f);
-            GetComponent<BoxCollider2D>().size = new Vector2(0.14f, 0.13f);
+            GetComponent<BoxCollider2D>().enabled = true;
+            //GetComponent<BoxCollider2D>().offset = new Vector2(0,-0.005f);
+            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f, 0.13f);
         }
         else if (!armsOut)
         {
-            GetComponent<CapsuleCollider2D>().enabled = false;
-            GetComponent<BoxCollider2D>().offset = new Vector2(0f,-0.038f);
-            GetComponent<BoxCollider2D>().size = new Vector2(0.14f,0.065f);
+            GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<BoxCollider2D>().offset = new Vector2(0f,-0.038f);
+            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f,0.065f);
         }
     }
 

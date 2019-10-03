@@ -12,7 +12,7 @@ public class HammerWBoulder : MonoBehaviour
 
      void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == hammer)
+        if (collision.gameObject == hammer || collision.gameObject.name == "hammer(Clone)")
         {
             Instantiate(rock1, transform.position + new Vector3(-0.1f , 0f, 0f ), new Quaternion());
             Instantiate(rock2, transform.position + new Vector3(0.1f, 0f, 0f), new Quaternion());

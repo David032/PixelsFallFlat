@@ -11,7 +11,7 @@ public class ShovelWDirt : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == shovel)
+        if (collision.gameObject == shovel || collision.gameObject.name == "shovel(Clone)")
         {
             Instantiate(hiddenItem, transform.position + new Vector3(0f, 0f, 0f), new Quaternion());
             Destroy(this.gameObject);

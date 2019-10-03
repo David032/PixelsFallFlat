@@ -9,6 +9,10 @@ public class AxeWTree : MonoBehaviour
     public GameObject axe;
     public GameObject trunk;
 
+    void FixedUpdate()
+    {
+        axe = GameObject.Find("axe");
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == axe)

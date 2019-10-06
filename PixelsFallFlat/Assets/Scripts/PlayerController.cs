@@ -158,7 +158,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        ///THIS WON'T WORK AS IS - THE TRIGGER VOLUME IS ONLY ACTIVE WHEN THE ARMS ARE OUT
         if (collision.gameObject.tag == "Void")
         {
 
@@ -186,12 +185,12 @@ public class PlayerController : MonoBehaviour
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
         speed = 1;
-        //speed = baseSpeed;
     }
 
     IEnumerator RespawnCountDown(float waitTime)
     {
         Debug.Log("respawning");
+        this.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f)); //Trying to scale the player down as they fall
         yield return new WaitForSeconds(waitTime);
         Respawn();
     }

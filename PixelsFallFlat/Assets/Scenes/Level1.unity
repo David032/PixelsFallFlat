@@ -67440,7 +67440,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.029910326, y: 0.00093463063}
@@ -67464,7 +67464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8613325004721402105}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: -2.67, y: 0.202, z: 0}
+  m_LocalPosition: {x: -2.65, y: 0.202, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -67480,6 +67480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8075328546952573495}
   - component: {fileID: 7311871665667718474}
+  - component: {fileID: 8613325004721402106}
   m_Layer: 0
   m_Name: pipeSpot
   m_TagString: Untagged
@@ -67487,3 +67488,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8613325004721402106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8613325004721402105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7483e6587f9dc4bb6fdb1654f82740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetSize: 1
+  TargetRotation: 0
+  pipeComplete: 0

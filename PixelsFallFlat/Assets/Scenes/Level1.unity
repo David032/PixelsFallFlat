@@ -7532,6 +7532,8 @@ MonoBehaviour:
   room: {fileID: 580271610}
   player1_pos: {fileID: 1196258283}
   player2_pos: {fileID: 1086367232}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &261853897
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12428,6 +12430,8 @@ MonoBehaviour:
   room: {fileID: 1713279074}
   player1_pos: {fileID: 801899301}
   player2_pos: {fileID: 1131465773}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &404631404
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20980,6 +20984,8 @@ MonoBehaviour:
   room: {fileID: 1677647322}
   player1_pos: {fileID: 1026668286}
   player2_pos: {fileID: 575288952}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &704615198
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26880,6 +26886,8 @@ MonoBehaviour:
   room: {fileID: 77097077}
   player1_pos: {fileID: 94870299}
   player2_pos: {fileID: 991773853}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &930217691
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27108,6 +27116,8 @@ MonoBehaviour:
   room: {fileID: 283227179}
   player1_pos: {fileID: 1710873046}
   player2_pos: {fileID: 1255277401}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &945044416
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32061,6 +32071,8 @@ MonoBehaviour:
   room: {fileID: 1677647322}
   player1_pos: {fileID: 1026668286}
   player2_pos: {fileID: 575288952}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &1095151825
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36006,7 +36018,7 @@ MonoBehaviour:
   armedPlayer: {fileID: 21300000, guid: 7ee2895990baac047ab46bc888bd0f0b, type: 3}
   thisPlayer: 0
   spawnPoint: {fileID: 801899301}
-  speed: 1
+  speed: 0
   playerVelocity: {x: 0, y: 0}
 --- !u!212 &1188126321
 SpriteRenderer:
@@ -36086,7 +36098,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -36412,6 +36424,8 @@ MonoBehaviour:
   room: {fileID: 1454122961}
   player1_pos: {fileID: 521381762}
   player2_pos: {fileID: 219118989}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &1195005387
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -37396,6 +37410,8 @@ MonoBehaviour:
   room: {fileID: 580271610}
   player1_pos: {fileID: 1196258283}
   player2_pos: {fileID: 1086367232}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &1221582446
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38877,6 +38893,8 @@ MonoBehaviour:
   room: {fileID: 766542130}
   player1_pos: {fileID: 738450940}
   player2_pos: {fileID: 107250214}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &1250997913
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -53788,6 +53806,8 @@ MonoBehaviour:
   room: {fileID: 283227179}
   player1_pos: {fileID: 1710873046}
   player2_pos: {fileID: 1255277401}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &1738498039
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55647,6 +55667,8 @@ MonoBehaviour:
   room: {fileID: 766542130}
   player1_pos: {fileID: 738450940}
   player2_pos: {fileID: 107250214}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &1789211381
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -59916,6 +59938,8 @@ MonoBehaviour:
   room: {fileID: 1677647322}
   player1_pos: {fileID: 1026668286}
   player2_pos: {fileID: 575288952}
+  ChangeLevel: 0
+  levelToLoad: 0
 --- !u!61 &1933776516
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -67032,6 +67056,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 686585882777672121, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 686585882777672127, guid: b17aa79069304244f8949fd952157bb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67091,7 +67120,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPoint
       value: 
-      objectReference: {fileID: 801899301}
+      objectReference: {fileID: 1131465773}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17aa79069304244f8949fd952157bb4, type: 3}
 --- !u!1001 &1043666875219764922

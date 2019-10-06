@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 playerVelocity;
 
     string hAxis = "P1Horizontal";
-    string vAxis = "P1V";
+    string vAxis = "P1Vertical";
 
     bool armsOut = false;
     GameObject grabbed = null;
@@ -50,9 +50,7 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxis(vAxis);
         speed = pWeight / GetComponent<Rigidbody2D>().mass;
 
-        Vector2 direction = new Vector2(h, v);
-        print(h + v);       
-
+        Vector2 direction = new Vector2(h, v);     
 
         if (direction != Vector2.zero) ///Add '&& grabbed == null' here to disable rotation whilst holding an object, trying to work out how to give better rotation
         {
@@ -74,14 +72,14 @@ public class PlayerController : MonoBehaviour
         if (armsOut)
         {
             GetComponent<CapsuleCollider2D>().enabled = true;
-            //GetComponent<BoxCollider2D>().offset = new Vector2(0,-0.005f);
-            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f, 0.13f);
+            //GetComponent<BoxCollider2D>().offset = new Vector2(0,-0.005f); - Disabled due to physics bugs
+            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f, 0.13f);- Disabled due to physics bugs
         }
         else if (!armsOut)
         {
             GetComponent<CapsuleCollider2D>().enabled = false;
-            //GetComponent<BoxCollider2D>().offset = new Vector2(0f,-0.038f);
-            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f,0.065f);
+            //GetComponent<BoxCollider2D>().offset = new Vector2(0f,-0.038f);- Disabled due to physics bugs
+            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f,0.065f);- Disabled due to physics bugs
         }
     }
 

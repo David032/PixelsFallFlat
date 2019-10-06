@@ -9,10 +9,20 @@ public class RoomChange : MonoBehaviour
     public GameObject player1_pos;
     public GameObject player2_pos;
 
+    public bool ChangeLevel;
+    public bool dissapearingDoor;
+    //Build order level, not level number(i.e. level 2 is 3)
+    public int levelToLoad;
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<PlayerController>())
         {
+            if (dissapearingDoor)
+            {
+                this.GetComponent<SpriteRenderer>().enabled = false;
+            }
             StartCoroutine(LoadRoom());
         }
     }
@@ -20,9 +30,15 @@ public class RoomChange : MonoBehaviour
     IEnumerator LoadRoom()
     {
         yield return new WaitForSeconds(1.5f);
-        GameObject.Find("Main Camera").transform.position = room.transform.position;
-        GameObject.Find("Player1").transform.position = player1_pos.transform.position;
-        GameObject.Find("Player2").transform.position = player2_pos.transform.position;
-        //SceneManager.LoadScene(SceneName);
+        if (!ChangeLevel)
+        {
+            GameObject.Find("Main Camera").transform.position = room.transform.position;
+            GameObject.Find("Player1").transform.position = player1_pos.transform.position;
+            GameObject.Find("Player2").transform.position = player2_pos.transform.position;
+        }
+        else if (ChangeLevel)
+        {
+            SceneManager.LoadScene(levelToLoad);
+        }
     }
 }

@@ -19,10 +19,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public Vector2 playerVelocity;
 
-    string hAxis = "Horizontal";
-    string vAxis = "Vertical";
+    string hAxis = "P1Horizontal";
+    string vAxis = "P1Vertical";
 
     bool armsOut = false;
+    bool dead = false;
     GameObject grabbed = null;
     Vector2 grabbedPosition;
 
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = basePlayer;
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
 
         playerBody = GetComponent<Rigidbody2D>();
 
@@ -48,18 +49,24 @@ public class PlayerController : MonoBehaviour
     {
         float h = Input.GetAxis(hAxis);
         float v = Input.GetAxis(vAxis);
+        if (dead)
+        { return; }
+
         speed = pWeight / GetComponent<Rigidbody2D>().mass;
 
-        Vector2 direction = new Vector2(h, v);
+        Vector2 direction = new Vector2(h, v);     
 
         if (direction != Vector2.zero) ///Add '&& grabbed == null' here to disable rotation whilst holding an object, trying to work out how to give better rotation
         {
             float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward);
+            //transform.rotation = Quaternion.AngleAxis(angle * -1, Vector3.forward); - Old rotation, might not be as snappy
+            transform.rotation.eulerAngles.Set(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, angle * -1);
         }
 
         playerVelocity = direction.normalized * speed;
-        playerBody.MovePosition(playerBody.position + playerVelocity * Time.fixedDeltaTime);
+        Vector2 pos = playerBody.position + playerVelocity * Time.fixedDeltaTime;
+        playerBody.MovePosition(pos);
     }
 
     void Update()
@@ -68,11 +75,15 @@ public class PlayerController : MonoBehaviour
 
         if (armsOut)
         {
-            GetComponent<BoxCollider2D>().enabled = true;
+            GetComponent<CapsuleCollider2D>().enabled = true;
+            //GetComponent<BoxCollider2D>().offset = new Vector2(0,-0.005f); - Disabled due to physics bugs
+            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f, 0.13f);- Disabled due to physics bugs
         }
         else if (!armsOut)
         {
-            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            //GetComponent<BoxCollider2D>().offset = new Vector2(0f,-0.038f);- Disabled due to physics bugs
+            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f,0.065f);- Disabled due to physics bugs
         }
     }
 
@@ -81,22 +92,24 @@ public class PlayerController : MonoBehaviour
         switch (thisPlayer)
         {
             case Player.Player1:
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("P1Grab"))
                 {
                     GetComponent<SpriteRenderer>().sprite = armedPlayer;
                     armsOut = true;
-                    grabbed.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
-                    grabbed.GetComponent<Rigidbody2D>().angularVelocity = 0;
                 }
-                else if (Input.GetButtonUp("Fire1"))
+                else if (Input.GetButtonUp("P1Grab"))
                 {
                     GetComponent<SpriteRenderer>().sprite = basePlayer;
                     armsOut = false;
-                    GetComponent<Rigidbody2D>().mass = pWeight;                    
-                    grabbed.transform.SetParent(null);
-                    grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                    grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                    grabbed = null;       
+                    GetComponent<Rigidbody2D>().mass = pWeight;
+
+                    if (grabbed && !dead)
+                    {
+                        grabbed.transform.SetParent(null);
+                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                        grabbed = null;
+                    }       
                 }
                 break;
 
@@ -112,7 +125,7 @@ public class PlayerController : MonoBehaviour
                     armsOut = false;
                     GetComponent<Rigidbody2D>().mass = pWeight;
 
-                    if (grabbed)
+                    if (grabbed && !dead)
                     {
                         grabbed.transform.SetParent(null);
                         grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
@@ -131,26 +144,53 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Movable")
         {
-            collision.transform.SetParent(this.transform);
+            if (grabbed == null)
+            {
+                grabbed = collision.gameObject;
+                collision.transform.SetParent(this.transform);
 
-            collision.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
-            grabbed = collision.gameObject;
-            GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
-            grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
-            grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                GetComponent<Rigidbody2D>().mass += collision.GetComponent<Rigidbody2D>().mass;
+                grabbedPosition = grabbed.GetComponent<Rigidbody2D>().position;
+
+                grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                grabbed.GetComponent<Rigidbody2D>().useFullKinematicContacts = true;
+                grabbed.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                grabbed.GetComponent<Rigidbody2D>().angularVelocity = 0;
+
+                GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                GetComponent<Rigidbody2D>().angularVelocity = 0;
+            }
         }
 
-        ///THIS WON'T WORK AS IS - THE TRIGGER VOLUME IS ONLY ACTIVE WHEN THE ARMS ARE OUT
         if (collision.gameObject.tag == "Void")
-        {
-            speed = 0;
-            Debug.Log("dead");
-            StartCoroutine(RespawnCountDown(2.0f));
-        }
+        {
+            speed = 0;
+
+            if (!dead)
+            {
+                StartCoroutine(RespawnCountDown(0.75f));
+            }
+        }
+
     }
     void Respawn()
     {
-        Debug.Log("respawn");
+        dead = false;
+        transform.localScale = new Vector3(1.0f, 1.0f);
+        speed = 1;
+    }
+
+    IEnumerator RespawnCountDown(float waitTime)
+    {
+        dead = true;
+        yield return new WaitForSeconds(waitTime/2);
+        this.gameObject.transform.localScale = new Vector3(0.75f, 0.75f);
+        yield return new WaitForSeconds(waitTime);
+        this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f);
+        yield return new WaitForSeconds(waitTime);
+        this.gameObject.transform.localScale = new Vector3(0.0f, 0.0f);
+        yield return new WaitForSeconds(waitTime);
+
         if (grabbed != null)
         {
             grabbed.transform.SetParent(null);
@@ -158,16 +198,10 @@ public class PlayerController : MonoBehaviour
             grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbed.GetComponent<RespawnObject>().Respawn();
             grabbed = null;
-        }
+        }
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
-        speed = 1;
-        //speed = baseSpeed;
-    }
-
-    IEnumerator RespawnCountDown(float waitTime)
-    {
-        Debug.Log("respawning");
+        this.gameObject.transform.localScale = new Vector3(1.33f, 1.33f);
         yield return new WaitForSeconds(waitTime);
         Respawn();
     }

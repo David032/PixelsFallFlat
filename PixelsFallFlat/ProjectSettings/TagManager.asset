@@ -7,6 +7,7 @@ TagManager:
   - Movable
   - AudioManager
   - Void
+  - Player1
   layers:
   - Default
   - TransparentFX

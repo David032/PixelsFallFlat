@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AxeWTree : MonoBehaviour
-{
-    public Transform spawnPos;
+{ 
 
     public GameObject tree;
     public GameObject axe;
     public GameObject trunk;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void FixedUpdate()
     {
-        if (collision.gameObject == axe)
+        axe = GameObject.Find("axe");
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "axe(Clone)" ||collision.gameObject == axe)
         {
-            //Destroy(tree.gameObject);
-            //Destroy(this.gameObject);
-            //Instantiate(trunk, spawnPos.position, spawnPos.rotation);
+            Debug.Log("Stuff");
+            Instantiate(trunk, transform.position + new Vector3(0.3f, 0f, 0f), new Quaternion());
+            Destroy(this.gameObject);
         }
+        Debug.Log("Other Stuff");
     }
 }

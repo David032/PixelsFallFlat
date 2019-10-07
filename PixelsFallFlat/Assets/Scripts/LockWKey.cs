@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class LockWKey : MonoBehaviour
 {
-    public Transform spawnPos;
+ 
 
     public GameObject keyLock;
     public GameObject key;
-    public GameObject keyLockWithKey;
+    public Sprite keyLockWithKey;
 
-    void OnTriggerEnter2D(Collider2D collision)
+   void OnCollisionEnter2D(Collision2D collision)
     {
         //if (collision.gameObject.tag == "Key")
         //{
 
         //}
-        if (collision.gameObject == key)
+        if (collision.gameObject == key || collision.gameObject.name == "key(Clone)")
         {
             //Locked Door open
-            //Destroy(keyLock.gameObject);
+            Destroy(key.gameObject);
             //Destroy(this.gameObject);
-            //Instantiate(keyLockWithKey, spawnPos.position, spawnPos.rotation);
+            gameObject.GetComponent<SpriteRenderer>().sprite = keyLockWithKey;
         }
     }
 }

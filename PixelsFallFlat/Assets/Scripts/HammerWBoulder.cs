@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class HammerWBoulder : MonoBehaviour
 {
-    public Transform spawnPos;
-
+ 
     public GameObject boulder;
     public GameObject hammer;
     public GameObject rock1;
     public GameObject rock2;
 
-    void OnTriggerEnter2D(Collider2D collision)
+     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == hammer)
+        if (collision.gameObject == hammer || collision.gameObject.name == "hammer(Clone)")
         {
-            //Destroy(boulder.gameObject);
-            //Destroy(this.gameObject);
-            //Instantiate(rock1, spawnPos.position, spawnPos.rotation);
-            //Instantiate(rock2, spawnPos.position, spawnPos.rotation);
+            Instantiate(rock1, transform.position + new Vector3(-0.1f , 0f, 0f ), new Quaternion());
+            Instantiate(rock2, transform.position + new Vector3(0.1f, 0f, 0f), new Quaternion());
+            Destroy(this.gameObject);
         }
     }
 }

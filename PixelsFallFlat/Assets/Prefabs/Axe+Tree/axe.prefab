@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4975172892105553157}
   - component: {fileID: 4975172892105553158}
   - component: {fileID: 4975172892105553159}
+  - component: {fileID: 418082048473465676}
   m_Layer: 0
   m_Name: axe
   m_TagString: Movable
@@ -129,3 +130,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &418082048473465676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4975172892105553152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3d4090ea19e344a8610e3ae1ddfe74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

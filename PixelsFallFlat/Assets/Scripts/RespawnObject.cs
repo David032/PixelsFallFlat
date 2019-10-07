@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class RespawnObject : MonoBehaviour
 {
-    public GameObject spawnPoint;
+    GameObject spawnPoint;
     bool dead = false;
+
+    private void Start()
+    {
+        spawnPoint = new GameObject();
+        spawnPoint.transform.position = transform.position;
+        spawnPoint.transform.rotation = transform.rotation;        
+    }
 
     public void Respawn()
     {
@@ -16,6 +23,17 @@ public class RespawnObject : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Void" && transform.parent == null)
+        {
+            if (!dead)
+            {
+                StartCoroutine(DeathFall(0.75f));
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Void" && transform.parent == null)
         {
@@ -45,6 +63,5 @@ public class RespawnObject : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         transform.localScale = new Vector3(1.0f, 1.0f);
         dead = false;
-
     }
 }

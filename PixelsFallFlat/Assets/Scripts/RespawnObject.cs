@@ -9,29 +9,42 @@ public class RespawnObject : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("spawned");
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
+
+        StartCoroutine(SpawnFall(0.75f));
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Void" && transform.parent == null)
         {
-            Debug.Log("dead");
             if (!dead)
             {
-                StartCoroutine(RespawnCountDown(2.0f));
+                StartCoroutine(DeathFall(0.75f));
             }
         }
     }
 
-    IEnumerator RespawnCountDown(float waitTime)
+    IEnumerator DeathFall(float waitTime)
     {
-        Debug.Log("respawning");
         dead = true;
-        this.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f)); //Trying to scale the player down as they fall
+        yield return new WaitForSeconds(waitTime / 2);
+        this.gameObject.transform.localScale = new Vector3(0.75f, 0.75f);
+        yield return new WaitForSeconds(waitTime);
+        this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f);
+        yield return new WaitForSeconds(waitTime);
+        this.gameObject.transform.localScale = new Vector3(0.0f, 0.0f);
         yield return new WaitForSeconds(waitTime);
         Respawn();
+    }
+
+    IEnumerator SpawnFall(float waitTime)
+    {
+        this.gameObject.transform.localScale = new Vector3(1.33f, 1.33f);
+        yield return new WaitForSeconds(waitTime);
+        transform.localScale = new Vector3(1.0f, 1.0f);
+        dead = false;
+
     }
 }

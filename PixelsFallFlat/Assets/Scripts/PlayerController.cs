@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     string vAxis = "P1Vertical";
 
     bool armsOut = false;
+    bool dead = false;
     GameObject grabbed = null;
     Vector2 grabbedPosition;
 
@@ -48,6 +49,9 @@ public class PlayerController : MonoBehaviour
     {
         float h = Input.GetAxis(hAxis);
         float v = Input.GetAxis(vAxis);
+        if (dead)
+        { return; }
+
         speed = pWeight / GetComponent<Rigidbody2D>().mass;
 
         Vector2 direction = new Vector2(h, v);     
@@ -99,7 +103,7 @@ public class PlayerController : MonoBehaviour
                     armsOut = false;
                     GetComponent<Rigidbody2D>().mass = pWeight;
 
-                    if (grabbed)
+                    if (grabbed && !dead)
                     {
                         grabbed.transform.SetParent(null);
                         grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
@@ -121,7 +125,7 @@ public class PlayerController : MonoBehaviour
                     armsOut = false;
                     GetComponent<Rigidbody2D>().mass = pWeight;
 
-                    if (grabbed)
+                    if (grabbed && !dead)
                     {
                         grabbed.transform.SetParent(null);
                         grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
@@ -160,19 +164,33 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Void")
         {
-
             speed = 0;
 
-            Debug.Log("dead");
-
-            StartCoroutine(RespawnCountDown(2.0f));
-
+            if (!dead)
+            {
+                StartCoroutine(RespawnCountDown(0.75f));
+            }
         }
 
     }
     void Respawn()
     {
-        Debug.Log("respawn");
+        dead = false;
+        transform.localScale = new Vector3(1.0f, 1.0f);
+        speed = 1;
+    }
+
+    IEnumerator RespawnCountDown(float waitTime)
+    {
+        dead = true;
+        yield return new WaitForSeconds(waitTime/2);
+        this.gameObject.transform.localScale = new Vector3(0.75f, 0.75f);
+        yield return new WaitForSeconds(waitTime);
+        this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f);
+        yield return new WaitForSeconds(waitTime);
+        this.gameObject.transform.localScale = new Vector3(0.0f, 0.0f);
+        yield return new WaitForSeconds(waitTime);
+
         if (grabbed != null)
         {
             grabbed.transform.SetParent(null);
@@ -181,16 +199,9 @@ public class PlayerController : MonoBehaviour
             grabbed.GetComponent<RespawnObject>().Respawn();
             grabbed = null;
         }
-
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
-        speed = 1;
-    }
-
-    IEnumerator RespawnCountDown(float waitTime)
-    {
-        Debug.Log("respawning");
-        this.gameObject.transform.localScale.Scale(new Vector3(0.5f, 0.5f)); //Trying to scale the player down as they fall
+        this.gameObject.transform.localScale = new Vector3(1.33f, 1.33f);
         yield return new WaitForSeconds(waitTime);
         Respawn();
     }

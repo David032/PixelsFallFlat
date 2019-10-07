@@ -13,8 +13,10 @@ public class PipeInteraction : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PipeHandler>().Pipe == TargetSize)
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().rotation = 0f;
+            collision.gameObject.GetComponent<Rigidbody2D>().rotation = TargetRotation;
+            collision.gameObject.GetComponent<Transform>().rotation.eulerAngles.Set(0f, 0f, TargetRotation);
             collision.gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+
             collision.gameObject.transform.SetParent(transform);
             collision.gameObject.transform.position = this.transform.position;
             collision.gameObject.GetComponent<Transform>().rotation.eulerAngles.Set(0f, 0f, TargetRotation);

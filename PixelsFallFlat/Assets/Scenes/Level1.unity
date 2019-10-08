@@ -28771,7 +28771,7 @@ MonoBehaviour:
   hammer: {fileID: 1886423844}
   door: {fileID: 21300000, guid: a03e23365e81dc549bd5ad0692d8a08c, type: 3}
   passage: {fileID: 945044416}
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 424109971}
 --- !u!61 &998494947
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -37028,6 +37028,7 @@ MonoBehaviour:
   grabbingClip: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
   pNum: 0
   isPlaying: 0
+  playerVector: {x: 0, y: 0}
 --- !u!1001 &1188973566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37920,9 +37921,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActive: 0
-  audioManager: {fileID: 424109971}
   inactive: {fileID: 0}
   active: {fileID: 0}
+  audioManager: {fileID: 424109971}
 --- !u!61 &1211238230
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -60964,9 +60965,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActive: 0
-  audioManager: {fileID: 424109971}
   inactive: {fileID: 0}
   active: {fileID: 0}
+  audioManager: {fileID: 424109971}
 --- !u!61 &1924957615
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -68713,6 +68714,16 @@ PrefabInstance:
       propertyPath: grabbingClip
       value: 
       objectReference: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
+    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: WalkingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fb97e94684dacf945965a26c42963552, type: 3}
+    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: grabbingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
     - target: {fileID: 686585882777672127, guid: b17aa79069304244f8949fd952157bb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -68773,16 +68784,6 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1131465773}
-    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
-        type: 3}
-      propertyPath: WalkingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fb97e94684dacf945965a26c42963552, type: 3}
-    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
-        type: 3}
-      propertyPath: grabbingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17aa79069304244f8949fd952157bb4, type: 3}
 --- !u!1001 &1043666875219764922

@@ -1,0 +1,38 @@
+public class AudioScript : MonoBehaviour {
+
+public AudioClip AudioClip; 
+
+
+public MusicSource;
+
+void Start () {
+MusicSource.clip = AudioClip;
+
+
+}
+
+void Update {
+
+if(Input.GetKeyDown(KeyCode.w))   //need to change for d pad. 
+MusicSource.Play();
+if(Input.GetKeyDown(KeyCode.s))   //need to change for d pad.
+MusicSource.Play();
+if(Input.GetKeyDown(KeyCode.a))   //need to change for d pad.
+MusicSource.Play();
+if(Input.GetKeyDown(KeyCode.d))   //need to change for d pad.
+MusicSource.Play();
+
+if(Input.GetKeyDown(KeyCode.button))   //need to change for d pad.
+MusicSource.Play();
+if(Input.GetKeyDown(KeyCode.button2))   //need to change for d pad.
+MusicSource.Play();
+
+
+//add this script to anything you want sound on you just need to add the Audioclip and where the source is coming from (e.g The door.)
+
+
+
+
+ 
+
+}

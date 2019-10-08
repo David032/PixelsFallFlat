@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class EMStateCheck : MonoBehaviour
 {
     public GameObject start_button;
-    private GameObject level_button;
+    public GameObject level_button;
     public GameObject music_on_button;
     public GameObject music_off_button;
     public GameObject credit_exit_button;

@@ -21,7 +21,7 @@ public class LockWKey : MonoBehaviour
         if (collision.gameObject == key || collision.gameObject.name == "key(Clone)")
         {
             //Locked Door open
-            Destroy(key.gameObject);
+            Destroy(collision.gameObject);
             audioManager.PlayUnlockSound();
             //Destroy(this.gameObject);
             gameObject.GetComponent<SpriteRenderer>().sprite = keyLockWithKey;

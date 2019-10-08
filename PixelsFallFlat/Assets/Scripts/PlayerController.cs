@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     float pWeight = 0.0f;
 
+    public WorldSounds audioManager;
+
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = basePlayer;
@@ -189,6 +191,16 @@ public class PlayerController : MonoBehaviour
         this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f);
         yield return new WaitForSeconds(waitTime);
         this.gameObject.transform.localScale = new Vector3(0.0f, 0.0f);
+        switch (thisPlayer)
+        {
+            case Player.Player1:
+                audioManager.PlayDeath1Sound();
+                break;
+            case Player.Player2:
+                audioManager.PlayDeath2Sound();
+                break;
+        }
+
         yield return new WaitForSeconds(waitTime);
 
         if (grabbed != null)
@@ -202,6 +214,7 @@ public class PlayerController : MonoBehaviour
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
         this.gameObject.transform.localScale = new Vector3(1.33f, 1.33f);
+        audioManager.PlayRespawnSound();
         yield return new WaitForSeconds(waitTime);
         Respawn();
     }

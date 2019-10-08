@@ -29630,7 +29630,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026668286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 0, z: 0}
+  m_LocalPosition: {x: -0.014, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1094897231}
@@ -36975,6 +36975,7 @@ GameObject:
   - component: {fileID: 1195005388}
   - component: {fileID: 1195005387}
   - component: {fileID: 1195005386}
+  - component: {fileID: 1195005390}
   m_Layer: 0
   m_Name: door2
   m_TagString: Untagged
@@ -37116,6 +37117,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1195005390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195005384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4f80e5cfe7b2245aa87840cd18bc52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pad1: {fileID: 1211238226}
+  pad2: {fileID: 1924957611}
+  padBool1: 0
+  padBool2: 0
+  openDoor: {fileID: 21300000, guid: a03e23365e81dc549bd5ad0692d8a08c, type: 3}
+  secondDoor: {fileID: 1250997910}
+  closedDoor: {fileID: 21300000, guid: b6db4408db7422f41923040ceb309692, type: 3}
 --- !u!1 &1196258283
 GameObject:
   m_ObjectHideFlags: 0
@@ -37615,8 +37635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActive: 0
-  inactive: {fileID: 0}
-  active: {fileID: 0}
+  inactive: {fileID: 21300000, guid: 112d9179ca219d6459005875bc7f8e17, type: 3}
+  active: {fileID: 21300000, guid: a53b37df616467447a14dc07ee2ad01a, type: 3}
   audioManager: {fileID: 424109971}
 --- !u!61 &1211238230
 BoxCollider2D:
@@ -60659,8 +60679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActive: 0
-  inactive: {fileID: 0}
-  active: {fileID: 0}
+  inactive: {fileID: 21300000, guid: 112d9179ca219d6459005875bc7f8e17, type: 3}
+  active: {fileID: 21300000, guid: a53b37df616467447a14dc07ee2ad01a, type: 3}
   audioManager: {fileID: 424109971}
 --- !u!61 &1924957615
 BoxCollider2D:

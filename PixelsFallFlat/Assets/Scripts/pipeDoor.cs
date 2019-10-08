@@ -20,10 +20,13 @@ public class pipeDoor : MonoBehaviour
         pipeBool1 = pipeSpot1.GetComponent<PipeInteraction>().pipeComplete;
         pipeBool2 = pipeSpot2.GetComponent<PipeInteraction>().pipeComplete;
 
+
+
         Debug.Log(pipeBool1 + " " + pipeBool2);
 
         if(pipeBool1 == true && pipeBool2 == true)
         {
+            //door is open
             this.GetComponent<RoomChange>().canMove = true;
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
 

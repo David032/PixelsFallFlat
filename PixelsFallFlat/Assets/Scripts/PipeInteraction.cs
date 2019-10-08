@@ -13,7 +13,7 @@ public class PipeInteraction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PipeHandler>().Pipe == TargetSize)
+S
         {
             audioManager.PlayPipeplaceSound();
 

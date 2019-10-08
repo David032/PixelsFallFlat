@@ -41,9 +41,11 @@ public class RoomChange : MonoBehaviour
         {
             GameObject.Find("Main Camera").transform.position = room.transform.position;
             GameObject.Find("Player1").transform.position = player1_pos.transform.position;
+            GameObject.Find("Player1").GetComponent<PlayerController>().spawnPoint = player1_pos;
             if (GameObject.Find("Player2")) // prevent error messages in consol
             {
                 GameObject.Find("Player2").transform.position = player2_pos.transform.position;
+                GameObject.Find("Player2").GetComponent<PlayerController>().spawnPoint = player2_pos;
             }
         }
         else if (ChangeLevel)

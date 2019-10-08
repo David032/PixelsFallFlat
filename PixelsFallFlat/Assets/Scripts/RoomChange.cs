@@ -11,6 +11,7 @@ public class RoomChange : MonoBehaviour
 
     public bool ChangeLevel;
     public bool dissapearingDoor;
+    public bool canMove;
     //Build order level, not level number(i.e. level 2 is 3)
     public int levelToLoad;
 
@@ -23,7 +24,12 @@ public class RoomChange : MonoBehaviour
             {
                 this.GetComponent<SpriteRenderer>().enabled = false;
             }
-            StartCoroutine(LoadRoom());
+
+            if(canMove)
+            {
+                StartCoroutine(LoadRoom());
+            }
+            
         }
     }
 

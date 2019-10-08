@@ -14,6 +14,7 @@ public class HammerWWall : MonoBehaviour
         {
             this.GetComponent<SpriteRenderer>().sprite = door;
             passage.enabled = true;
+            GetComponentInChildren<RoomChange>().canMove = true;
         }
     }
 }

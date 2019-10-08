@@ -37155,6 +37155,7 @@ MonoBehaviour:
   openDoor: {fileID: 21300000, guid: a03e23365e81dc549bd5ad0692d8a08c, type: 3}
   secondDoor: {fileID: 1250997910}
   closedDoor: {fileID: 21300000, guid: b6db4408db7422f41923040ceb309692, type: 3}
+  audioManager: {fileID: 424109971}
 --- !u!1 &1196258283
 GameObject:
   m_ObjectHideFlags: 0

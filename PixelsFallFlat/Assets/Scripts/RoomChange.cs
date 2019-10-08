@@ -15,6 +15,7 @@ public class RoomChange : MonoBehaviour
     //Build order level, not level number(i.e. level 2 is 3)
     public int levelToLoad;
 
+    public WorldSounds audioManager;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -47,6 +48,7 @@ public class RoomChange : MonoBehaviour
         }
         else if (ChangeLevel)
         {
+            audioManager.PlayNextLevelSound();
             SceneManager.LoadScene(levelToLoad);
         }
     }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pipeDoor : MonoBehaviour
+public class PipeDoor2 : MonoBehaviour
 {
-    public GameObject pipeSpot1;
-    public bool pipeBool1; 
-    public GameObject pipeSpot2;
-    public bool pipeBool2;
+    public GameObject pipeSpot3;
+    public bool pipeBool3;
+    public GameObject pipeSpot4;
+    public bool pipeBool4;
     public Sprite openDoor;
     public GameObject secondDoor;
 
@@ -17,14 +17,14 @@ public class pipeDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pipeBool1 = pipeSpot1.GetComponent<PipeInteraction>().pipeComplete;
-        pipeBool2 = pipeSpot2.GetComponent<PipeInteraction>().pipeComplete;
+        pipeBool3 = pipeSpot3.GetComponent<PipeInteraction>().pipeComplete;
+        pipeBool4 = pipeSpot4.GetComponent<PipeInteraction>().pipeComplete;
 
 
 
-        Debug.Log(pipeBool1 + " " + pipeBool2);
+        Debug.Log(pipeBool3 + " " + pipeBool4);
 
-        if(pipeBool1 == true && pipeBool2 == true)
+        if (pipeBool3 == true && pipeBool4 == true)
         {
             //door is open
             this.GetComponent<RoomChange>().canMove = true;

@@ -11,6 +11,7 @@ public class LockWKey : MonoBehaviour
     public Sprite keyLockWithKey;
 
     public WorldSounds audioManager;
+    public bool doorIsOpen;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -25,6 +26,7 @@ public class LockWKey : MonoBehaviour
             audioManager.PlayUnlockSound();
             //Destroy(this.gameObject);
             gameObject.GetComponent<SpriteRenderer>().sprite = keyLockWithKey;
+            doorIsOpen = true;
         }
     }
 }

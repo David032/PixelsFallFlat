@@ -13,6 +13,7 @@ public class PressurePad : MonoBehaviour
         if (collision.gameObject.GetComponent<CrateHandler>())
         {
             IsActive = true;
+            GetComponent<SpriteRenderer>().sprite = active;
         }
     }
 

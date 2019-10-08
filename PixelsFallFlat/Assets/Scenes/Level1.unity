@@ -52158,7 +52158,7 @@ MonoBehaviour:
   player2_pos: {fileID: 575288952}
   ChangeLevel: 0
   dissapearingDoor: 0
-  canMove: 0
+  canMove: 1
   levelToLoad: 0
 --- !u!61 &1631909634
 BoxCollider2D:
@@ -52250,7 +52250,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b6db4408db7422f41923040ceb309692, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a03e23365e81dc549bd5ad0692d8a08c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -68437,6 +68437,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: WalkingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fb97e94684dacf945965a26c42963552, type: 3}
+    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: grabbingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
+    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: WalkingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fb97e94684dacf945965a26c42963552, type: 3}
+    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: grabbingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
     - target: {fileID: 686585882777672127, guid: b17aa79069304244f8949fd952157bb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -68497,26 +68517,6 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1131465773}
-    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
-        type: 3}
-      propertyPath: WalkingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fb97e94684dacf945965a26c42963552, type: 3}
-    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
-        type: 3}
-      propertyPath: grabbingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
-    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
-        type: 3}
-      propertyPath: WalkingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fb97e94684dacf945965a26c42963552, type: 3}
-    - target: {fileID: 8806392328537836376, guid: b17aa79069304244f8949fd952157bb4,
-        type: 3}
-      propertyPath: grabbingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17aa79069304244f8949fd952157bb4, type: 3}
 --- !u!1001 &1043666875219764922

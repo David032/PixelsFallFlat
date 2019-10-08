@@ -6,7 +6,7 @@ public class MenuMusic : MonoBehaviour
 {
 
     public AudioClip menu_music;
-    public AudioSource music_source;
+    public AudioSource audio_source;
 
     bool current_state;
     bool last_state;
@@ -17,8 +17,8 @@ public class MenuMusic : MonoBehaviour
         current_state = true;
         last_state = true;
 
-        music_source.clip = menu_music;
-        music_source.Play();
+        audio_source.clip = menu_music;
+        audio_source.Play();
     }
 
     void Update()
@@ -40,13 +40,13 @@ public class MenuMusic : MonoBehaviour
     {
         if (current_state)
         {
-            music_source.clip = menu_music;
-            music_source.Play();
+            audio_source.clip = menu_music;
+            audio_source.Play();
             last_state = current_state;
         }
         else
         {
-            music_source.Stop();
+            audio_source.Stop();
             last_state = current_state;
         }
     }

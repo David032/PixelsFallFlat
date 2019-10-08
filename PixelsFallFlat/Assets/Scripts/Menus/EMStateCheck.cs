@@ -5,11 +5,12 @@ using UnityEngine.EventSystems;
 
 public class EMStateCheck : MonoBehaviour
 {
-
     public GameObject start_button;
+    private GameObject level_button;
     public GameObject music_on_button;
     public GameObject music_off_button;
     public GameObject credit_exit_button;
+    
 
     private int current_active;
     private int last_active;
@@ -61,10 +62,15 @@ public class EMStateCheck : MonoBehaviour
                 Debug.Log("State 2");
             }
         }
-        else
+        else if (current_active == 4)
         {
             EventSystem.current.SetSelectedGameObject(credit_exit_button);
             Debug.Log("State 4");
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(level_button);
+            Debug.Log("State 5");
         }
 
         last_active = current_active;

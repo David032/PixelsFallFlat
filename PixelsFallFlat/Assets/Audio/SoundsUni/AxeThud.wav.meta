@@ -1,9 +1,13 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 guid: 5a5d97100cfeacc46ae7ba027df74e6f
 =======
 guid: 6dc2d8363012655429b91903d4352b22
 >>>>>>> develop
+=======
+guid: e8ee7d5dd7d96944dba59465b394e0b0
+>>>>>>> Level2Cameras
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6

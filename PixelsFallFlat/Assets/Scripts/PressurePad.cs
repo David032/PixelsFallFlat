@@ -5,6 +5,8 @@ using UnityEngine;
 public class PressurePad : MonoBehaviour
 {
     public bool IsActive = false;
+    public Sprite inactive;
+    public Sprite active;
 
     void crateHandler(Collider2D collision) 
     {
@@ -27,5 +29,6 @@ public class PressurePad : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         IsActive = false;
+        GetComponent<SpriteRenderer>().sprite = inactive;
     }
 }

@@ -72,9 +72,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 65e965b5fdc6d1a4d9063f50f02c839b, type: 3}
-  m_Color: {r: 1, g: 0.84019786, b: 0, a: 1}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: e0d179ee218379f4d82037ec53109a6b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aad45ddefa161c44beb040a2782c943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basePlayer: {fileID: 21300000, guid: 65e965b5fdc6d1a4d9063f50f02c839b, type: 3}
-  armedPlayer: {fileID: 21300000, guid: 7ee2895990baac047ab46bc888bd0f0b, type: 3}
+  basePlayer: {fileID: 21300000, guid: e0d179ee218379f4d82037ec53109a6b, type: 3}
+  armedPlayer: {fileID: 21300000, guid: b286246039876144e87aa988842f7a42, type: 3}
   thisPlayer: 1
   spawnPoint: {fileID: 0}
   speed: 1

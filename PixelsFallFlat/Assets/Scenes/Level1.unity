@@ -68406,6 +68406,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 686585882777672121, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 686585882777672127, guid: b17aa79069304244f8949fd952157bb4,
         type: 3}
       propertyPath: m_LocalPosition.x

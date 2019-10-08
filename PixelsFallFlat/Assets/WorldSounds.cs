@@ -22,9 +22,31 @@ public class WorldSounds : MonoBehaviour
     public AudioClip v3;
     public AudioClip v4;
 
+    public AudioClip deathScream1;
+    public AudioClip deathScream2;
+    public AudioClip respawn;
+
     public void SetNewState(bool music_state)
     {
         audio_source.mute = music_state;
+    }
+
+    public void PlayDeath1Sound()
+    {
+        audio_source.clip = deathScream1;
+        audio_source.Play();
+    }
+
+    public void PlayDeath2Sound()
+    {
+        audio_source.clip = deathScream2;
+        audio_source.Play();
+    }
+
+    public void PlayRespawnSound()
+    {
+        audio_source.clip = respawn;
+        audio_source.Play();
     }
 
     public void PlayShovelSound()

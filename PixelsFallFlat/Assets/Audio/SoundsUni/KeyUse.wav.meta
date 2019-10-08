@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
 guid: b4ebc20c31377044eb429c7623e34d8f
-=======
-guid: c58c78115c6a5b2419a9d6a5df3fbcea
->>>>>>> develop
-=======
-guid: 79f312be8cc4fbf4ab9f4f1f0720c698
->>>>>>> Level2Cameras
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -19,7 +11,7 @@ AudioImporter:
     quality: 1
     conversionMode: 0
   platformSettingOverrides: {}
-  forceToMono: 0
+  forceToMono: 1
   normalize: 1
   preloadAudioData: 1
   loadInBackground: 0

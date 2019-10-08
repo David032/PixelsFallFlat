@@ -14,6 +14,9 @@ public class PressurePlateDoor1 : MonoBehaviour
     public GameObject secondDoor;
     public Sprite closedDoor;
 
+    public WorldSounds audioManager;
+    bool open = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -24,6 +27,11 @@ public class PressurePlateDoor1 : MonoBehaviour
         if(padBool1 == true && padBool2 == true)
         {
             //door is open
+            if (!open)
+            {
+                audioManager.PlayDoorOpenSound();
+                open = true;
+            }
             this.GetComponent<RoomChange>().canMove = true;
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
 
@@ -33,6 +41,7 @@ public class PressurePlateDoor1 : MonoBehaviour
         else
         {
             //door is closed
+            open = false;
             this.GetComponent<RoomChange>().canMove = false;
             this.GetComponent<SpriteRenderer>().sprite = closedDoor;
 

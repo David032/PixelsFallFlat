@@ -36503,6 +36503,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 94870299}
   speed: 0
   playerVelocity: {x: 0, y: 0}
+  audioManager: {fileID: 424109971}
 --- !u!212 &1188126321
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36741,7 +36742,6 @@ MonoBehaviour:
   grabbingClip: {fileID: 8300000, guid: 264fea41129e39540aba717f50748a15, type: 3}
   pNum: 0
   isPlaying: 0
-  playerVector: {x: 0, y: 0}
 --- !u!1001 &1188973566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37155,6 +37155,7 @@ MonoBehaviour:
   openDoor: {fileID: 21300000, guid: a03e23365e81dc549bd5ad0692d8a08c, type: 3}
   secondDoor: {fileID: 1250997910}
   closedDoor: {fileID: 21300000, guid: b6db4408db7422f41923040ceb309692, type: 3}
+  audioManager: {fileID: 424109971}
 --- !u!1 &1196258283
 GameObject:
   m_ObjectHideFlags: 0
@@ -68517,6 +68518,11 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1131465773}
+    - target: {fileID: 686585882777672125, guid: b17aa79069304244f8949fd952157bb4,
+        type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 424109971}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17aa79069304244f8949fd952157bb4, type: 3}
 --- !u!1001 &1043666875219764922
@@ -68684,6 +68690,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5455529817804730554, guid: 9d9095f11eb057d4d839d120c08a2ca6,
+        type: 3}
+      propertyPath: deathScream1
+      value: 
+      objectReference: {fileID: 8300000, guid: b6f84893b4aca2d49a0eec6f1c2a4103, type: 3}
+    - target: {fileID: 5455529817804730554, guid: 9d9095f11eb057d4d839d120c08a2ca6,
+        type: 3}
+      propertyPath: deathScream2
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f4db6c889f67d04fab3ed7b4f64289f, type: 3}
+    - target: {fileID: 5455529817804730554, guid: 9d9095f11eb057d4d839d120c08a2ca6,
+        type: 3}
+      propertyPath: respawn
+      value: 
+      objectReference: {fileID: 8300000, guid: beb5e64d61de68944ab52b20363141fa, type: 3}
     - target: {fileID: 5455529817804730555, guid: 9d9095f11eb057d4d839d120c08a2ca6,
         type: 3}
       propertyPath: m_LocalPosition.x

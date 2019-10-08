@@ -11,13 +11,13 @@ public class AudioController : MonoBehaviour
     public bool isPlaying = false;
 
     AudioSource player;
-    public Vector2 playerVector;
+    Vector2 playerVector;
     string grabButton;
 
     void Start()
     {
         player = GetComponent<AudioSource>();
-        
+        playerVector = GetComponent<PlayerController>().playerVelocity;
 
         switch (pNum)
         {
@@ -32,9 +32,10 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        playerVector = GetComponent<PlayerController>().playerVelocity;
+        float x = playerVector.x;
+        float y = playerVector.y;
 
         if (Input.GetButtonDown(grabButton))
         {
@@ -43,12 +44,11 @@ public class AudioController : MonoBehaviour
             player.Play();
         }
 
-        if (playerVector != Vector2.zero)
+        else if (playerVector != Vector2.zero)
         {
-            print("Walking!");
             player.clip = WalkingClip;
             isPlaying = true;
-            player.Play();
+            //player.Play();
         }
     }
 

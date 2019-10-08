@@ -36,7 +36,7 @@ public class RoomChange : MonoBehaviour
 
     IEnumerator LoadRoom()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.01f);
         if (!ChangeLevel)
         {
             GameObject.Find("Main Camera").transform.position = room.transform.position;

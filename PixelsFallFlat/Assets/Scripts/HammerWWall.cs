@@ -8,12 +8,16 @@ public class HammerWWall : MonoBehaviour
     public Sprite door;
     public BoxCollider2D passage;
 
+    public WorldSounds audioManager;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == hammer || collision.gameObject.name == "hammer(Clone)")
         {
             this.GetComponent<SpriteRenderer>().sprite = door;
             passage.enabled = true;
+            audioManager.PlayBreakingSound();
+            GetComponentInChildren<RoomChange>().canMove = true;
         }
     }
 }

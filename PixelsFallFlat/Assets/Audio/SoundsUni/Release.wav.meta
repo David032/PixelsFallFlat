@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
+guid: 3cb1f9689d15e0e4b94f0d70cfde4ef8
+=======
+guid: 7e0ae5d388b2d7e4fbee4ddbbad96be7
+>>>>>>> develop
+=======
+guid: f6c4572e10339754aa7968db0d652c76
+>>>>>>> Level2Cameras
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

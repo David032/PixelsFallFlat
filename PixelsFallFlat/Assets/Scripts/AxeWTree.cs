@@ -10,6 +10,7 @@ public class AxeWTree : MonoBehaviour
     public GameObject trunk;
     public GameObject[] voidTiles;
 
+    public WorldSounds audioManager;
 
     void FixedUpdate()
     {
@@ -19,14 +20,14 @@ public class AxeWTree : MonoBehaviour
     {
         if (collision.gameObject.name == "axe(Clone)" ||collision.gameObject == axe)
         {
-            Debug.Log("Stuff");
+            audioManager.PlayAxeSound();
             Instantiate(trunk, transform.position + new Vector3(0.3f, 0f, 0f), new Quaternion());
             foreach(GameObject tile in voidTiles)
             {
                 tile.GetComponent<BoxCollider2D>().enabled = false;
             }
+            audioManager.PlayTreeSound();
             Destroy(this.gameObject);
         }
-        Debug.Log("Other Stuff");
     }
 }

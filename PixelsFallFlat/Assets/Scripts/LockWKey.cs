@@ -10,7 +10,9 @@ public class LockWKey : MonoBehaviour
     public GameObject key;
     public Sprite keyLockWithKey;
 
-   void OnCollisionEnter2D(Collision2D collision)
+    public WorldSounds audioManager;
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
         //if (collision.gameObject.tag == "Key")
         //{
@@ -20,6 +22,7 @@ public class LockWKey : MonoBehaviour
         {
             //Locked Door open
             Destroy(key.gameObject);
+            audioManager.PlayUnlockSound();
             //Destroy(this.gameObject);
             gameObject.GetComponent<SpriteRenderer>().sprite = keyLockWithKey;
         }

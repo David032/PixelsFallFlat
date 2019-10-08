@@ -7,12 +7,16 @@ public class PipeInteraction : MonoBehaviour
     public PipeHandler.PipeSize TargetSize = PipeHandler.PipeSize.Full;
     public float TargetRotation = 0f;
 
+    public WorldSounds audioManager;
+
     public bool pipeComplete = false;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<PipeHandler>().Pipe == TargetSize)
         {
+            audioManager.PlayPipeplaceSound();
+
             collision.gameObject.GetComponent<Rigidbody2D>().rotation = TargetRotation;
             collision.gameObject.GetComponent<Transform>().rotation.eulerAngles.Set(0f, 0f, TargetRotation);
             collision.gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;

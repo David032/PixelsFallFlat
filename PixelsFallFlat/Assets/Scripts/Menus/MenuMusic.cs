@@ -6,54 +6,33 @@ public class MenuMusic : MonoBehaviour
 {
 
     public AudioClip menu_music;
+    public AudioClip menu_music_2;
     public AudioSource audio_source;
-
-    bool current_state;
-    bool last_state;
-
-    //plays music as the menu is opened
-    void Start()
-    {
-        current_state = true;
-        last_state = true;
-
-        audio_source.clip = menu_music;
-        audio_source.Play();
-    }
 
     void Update()
     {
-        if (current_state != last_state)
-        {
-            PlayMusic();
-        }
-    }
+        float h = Input.GetAxis("P1Vertical");
+        float e = Input.GetAxis("P1Grab");
 
-    //allows the state to be changed, for music on/off.
-    public void SetNewState(bool music_state)
-    {
-        current_state = music_state;
-    }
-
-    //checks the wether to play the music depending on the current state.
-    private void PlayMusic()
-    {
-        if (current_state)
+        if (h != 0)
         {
             audio_source.clip = menu_music;
             audio_source.Play();
-            last_state = current_state;
         }
-        else
+
+        if (e != 0)
         {
-            audio_source.Stop();
-            last_state = current_state;
+            audio_source.clip = menu_music_2;
+            audio_source.Play();
         }
+
     }
 
-    public bool GetMusicState()
+    public void SetNewState(bool music_state)
     {
-        return current_state;
+        audio_source.mute = music_state;
     }
+
+
 
 }

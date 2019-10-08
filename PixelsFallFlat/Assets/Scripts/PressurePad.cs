@@ -6,6 +6,8 @@ public class PressurePad : MonoBehaviour
 {
     public bool IsActive = false;
 
+    public WorldSounds audioManager;
+
     void crateHandler(Collider2D collision) 
     {
         if (collision.gameObject.GetComponent<CrateHandler>())

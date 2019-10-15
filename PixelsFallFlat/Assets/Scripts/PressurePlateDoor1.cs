@@ -11,7 +11,6 @@ public class PressurePlateDoor1 : MonoBehaviour
     public bool padBool1;
     public bool padBool2;
     public Sprite openDoor;
-    public GameObject secondDoor;
     public Sprite closedDoor;
 
     public WorldSounds audioManager;
@@ -34,9 +33,8 @@ public class PressurePlateDoor1 : MonoBehaviour
             }
             this.GetComponent<RoomChange>().canMove = true;
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
-
-            secondDoor.GetComponent<RoomChange>().canMove = true;
-            secondDoor.GetComponent<SpriteRenderer>().sprite = openDoor;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, 0.034f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.0123f);
         }
         else
         {
@@ -44,9 +42,8 @@ public class PressurePlateDoor1 : MonoBehaviour
             open = false;
             this.GetComponent<RoomChange>().canMove = false;
             this.GetComponent<SpriteRenderer>().sprite = closedDoor;
-
-            secondDoor.GetComponent<RoomChange>().canMove = false;
-            secondDoor.GetComponent<SpriteRenderer>().sprite = closedDoor;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, 0.0f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.08f);
         }
     }
 }

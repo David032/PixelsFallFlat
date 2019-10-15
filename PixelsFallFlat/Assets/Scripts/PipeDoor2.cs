@@ -20,10 +20,6 @@ public class PipeDoor2 : MonoBehaviour
         pipeBool3 = pipeSpot3.GetComponent<PipeInteraction>().pipeComplete;
         pipeBool4 = pipeSpot4.GetComponent<PipeInteraction>().pipeComplete;
 
-
-
-        Debug.Log(pipeBool3 + " " + pipeBool4);
-
         if (pipeBool3 == true && pipeBool4 == true)
         {
             //door is open

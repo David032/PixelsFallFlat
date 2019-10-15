@@ -7661,6 +7661,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &261853897
@@ -12599,6 +12600,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 1
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &404631404
@@ -21180,6 +21182,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &704615198
@@ -27129,6 +27132,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &930217691
@@ -27380,6 +27384,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &945044416
@@ -33964,6 +33969,7 @@ MonoBehaviour:
   ChangeLevel: 1
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 2057705708}
   levelToLoad: 2
   audioManager: {fileID: 424109971}
 --- !u!61 &1120899867
@@ -37311,6 +37317,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &1195005387
@@ -38364,6 +38371,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 1
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &1221582446
@@ -39850,6 +39858,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &1250997913
@@ -52440,6 +52449,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 1
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &1631909634
@@ -55166,6 +55176,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 1
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &1738498039
@@ -57068,6 +57079,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &1789211381
@@ -61427,6 +61439,7 @@ MonoBehaviour:
   ChangeLevel: 0
   dissapearingDoor: 0
   canMove: 0
+  Completed: {fileID: 0}
   levelToLoad: 0
   audioManager: {fileID: 0}
 --- !u!61 &1933776516
@@ -65845,6 +65858,86 @@ Transform:
   - {fileID: 1145811075}
   m_Father: {fileID: 315030853}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2057705708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2057705710}
+  - component: {fileID: 2057705709}
+  m_Layer: 0
+  m_Name: CompletedLVL1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &2057705709
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057705708}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: 832af84c615758f4293e0d878526211b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.6, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &2057705710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057705708}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.001, y: 4.003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2058570524
 GameObject:

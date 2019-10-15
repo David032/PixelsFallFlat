@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -7470236447386838991}
   - component: {fileID: 717810703144221892}
   - component: {fileID: -5317802538344984083}
+  - component: {fileID: -6533300459948300321}
   m_Layer: 0
   m_Name: rock2
   m_TagString: Movable
@@ -142,3 +143,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3d4090ea19e344a8610e3ae1ddfe74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6533300459948300321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3703065141904811521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27b42d2cac7f2b4bad5e5a2bce33763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Crate: 1

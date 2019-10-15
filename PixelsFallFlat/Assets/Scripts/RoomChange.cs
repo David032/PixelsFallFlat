@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +12,7 @@ public class RoomChange : MonoBehaviour
     public bool ChangeLevel;
     public bool dissapearingDoor;
     public bool canMove;
+    public GameObject Completed;
     //Build order level, not level number(i.e. level 2 is 3)
     public int levelToLoad;
 
@@ -59,6 +60,9 @@ public class RoomChange : MonoBehaviour
         }
         else if (ChangeLevel)
         {
+            Completed.GetComponent<SpriteRenderer>().enabled = true;
+            yield return new WaitForSeconds(3f);
+
             audioManager.PlayNextLevelSound();
             SceneManager.LoadScene(levelToLoad);
         }

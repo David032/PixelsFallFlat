@@ -16,8 +16,6 @@ public class HammerWWall : MonoBehaviour
             this.GetComponent<SpriteRenderer>().sprite = door;
             audioManager.PlayBreakingSound();
             GetComponent<RoomChange>().canMove = true;
-            GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, 0.034f);
-            GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.0123f);
         }
     }
 }

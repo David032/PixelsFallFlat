@@ -11,22 +11,23 @@ public class PipeInteraction : MonoBehaviour
 
     public bool pipeComplete = false;
 
+    public SpriteRenderer sprite;
+
+    void start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+        sprite.enabled = false;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PipeHandler>().Pipe == TargetSize)
+        if (collision.gameObject.GetComponent<PipeHandler>().Pipe == TargetSize && !pipeComplete)
         {
             audioManager.PlayPipeplaceSound();
-
-            collision.gameObject.GetComponent<Rigidbody2D>().rotation = TargetRotation;
-            collision.gameObject.GetComponent<Transform>().rotation.eulerAngles.Set(0f, 0f, TargetRotation);
-            collision.gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
-
-            collision.gameObject.transform.SetParent(transform);
-            collision.gameObject.transform.position = this.transform.position;
-            collision.gameObject.GetComponent<Transform>().rotation.eulerAngles.Set(0f, 0f, TargetRotation);
-            collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             pipeComplete = true;
             collision.gameObject.tag.Replace(collision.gameObject.tag, null);
+            collision.gameObject.SetActive(false);
+            sprite.enabled = true;
         }
     }
 }

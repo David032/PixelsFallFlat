@@ -6,7 +6,6 @@ public class HammerWWall : MonoBehaviour
 {
     public GameObject hammer;
     public Sprite door;
-    public BoxCollider2D passage;
 
     public WorldSounds audioManager;
 
@@ -15,9 +14,10 @@ public class HammerWWall : MonoBehaviour
         if (collision.gameObject == hammer || collision.gameObject.name == "hammer(Clone)")
         {
             this.GetComponent<SpriteRenderer>().sprite = door;
-            passage.enabled = true;
             audioManager.PlayBreakingSound();
-            GetComponentInChildren<RoomChange>().canMove = true;
+            GetComponent<RoomChange>().canMove = true;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, 0.034f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.0123f);
         }
     }
 }

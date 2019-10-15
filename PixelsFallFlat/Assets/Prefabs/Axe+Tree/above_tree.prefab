@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 068b01530a871114a92908e175924335, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -123,3 +123,5 @@ MonoBehaviour:
   tree: {fileID: 3732673120356585672}
   axe: {fileID: 0}
   trunk: {fileID: 7615345803273846983, guid: 118d8c81a9ba285449afb201ef2b3956, type: 3}
+  voidTiles: []
+  audioManager: {fileID: 0}

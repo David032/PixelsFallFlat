@@ -33,6 +33,8 @@ public class PressurePlateDoor1 : MonoBehaviour
             }
             this.GetComponent<RoomChange>().canMove = true;
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, 0.034f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.0123f);
         }
         else
         {
@@ -40,6 +42,8 @@ public class PressurePlateDoor1 : MonoBehaviour
             open = false;
             this.GetComponent<RoomChange>().canMove = false;
             this.GetComponent<SpriteRenderer>().sprite = closedDoor;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, 0.0f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.08f);
         }
     }
 }

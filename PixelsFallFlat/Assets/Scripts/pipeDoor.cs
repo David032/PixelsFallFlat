@@ -25,6 +25,8 @@ public class pipeDoor : MonoBehaviour
             //door is open
             this.GetComponent<RoomChange>().canMove = true;
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
+            GetComponent<BoxCollider2D>().offset = new Vector2(0.0f,0.034f);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.2f, 0.0123f);
         }
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class RoomChange : MonoBehaviour
 {
     public GameObject room;
-    public GameObject player1_pos;
-    public GameObject player2_pos;
+    GameObject player1_pos;
+    GameObject player2_pos;
 
     public bool ChangeLevel;
     public bool dissapearingDoor;
@@ -16,6 +16,15 @@ public class RoomChange : MonoBehaviour
     public int levelToLoad;
 
     public WorldSounds audioManager;
+
+    private void Start()
+    {
+        if (!ChangeLevel)
+        {
+            player1_pos = this.transform.Find("P1Spawn").gameObject;
+            player2_pos = this.transform.Find("P2Spawn").gameObject;
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

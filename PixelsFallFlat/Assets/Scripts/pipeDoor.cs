@@ -9,7 +9,6 @@ public class pipeDoor : MonoBehaviour
     public GameObject pipeSpot2;
     public bool pipeBool2;
     public Sprite openDoor;
-    public GameObject secondDoor;
 
     // Start is called before the first frame update
 
@@ -26,9 +25,6 @@ public class pipeDoor : MonoBehaviour
             //door is open
             this.GetComponent<RoomChange>().canMove = true;
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
-
-            secondDoor.GetComponent<RoomChange>().canMove = true;
-            secondDoor.GetComponent<SpriteRenderer>().sprite = openDoor;
         }
     }
 }

@@ -19,7 +19,7 @@ public class LockWKey : MonoBehaviour
         //{
 
         //}
-        if (collision.gameObject == key || collision.gameObject.name == "key(Clone)")
+        if (collision.gameObject == key || collision.gameObject.name == "key(Clone)" || collision.gameObject.name == "key")
         {
             //Locked Door open
             Destroy(collision.gameObject);

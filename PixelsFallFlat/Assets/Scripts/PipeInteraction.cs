@@ -21,10 +21,18 @@ public class PipeInteraction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.GetComponent<PipeHandler>() == null)
+        {
+            return;
+        }
         if (collision.gameObject.GetComponent<PipeHandler>().Pipe == TargetSize && !pipeComplete)
         {
             audioManager.PlayPipeplaceSound();
             pipeComplete = true;
+            if (collision.transform.parent != null)
+            {
+                collision.transform.parent.GetComponent<PlayerController>().DropItem();
+            }
             collision.gameObject.tag.Replace(collision.gameObject.tag, null);
             collision.gameObject.SetActive(false);
             sprite.enabled = true;

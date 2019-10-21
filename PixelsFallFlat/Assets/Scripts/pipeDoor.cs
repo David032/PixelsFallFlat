@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class pipeDoor : MonoBehaviour
 {
-    public GameObject pipeSpot1;
-    public bool pipeBool1; 
-    public GameObject pipeSpot2;
-    public bool pipeBool2;
+    public GameObject[] pipeSpots;
+    bool pipeBool;
     public Sprite openDoor;
 
     // Start is called before the first frame update
@@ -16,14 +14,26 @@ public class pipeDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pipeBool1 = pipeSpot1.GetComponent<PipeInteraction>().pipeComplete;
-        pipeBool2 = pipeSpot2.GetComponent<PipeInteraction>().pipeComplete;
-
-
-        if(pipeBool1 == true && pipeBool2 == true)
+        pipeBool = true;
+        foreach (var pipeSpot in pipeSpots)
         {
-            //door is open
-            this.GetComponent<RoomChange>().canMove = true;
+            if (pipeSpot.GetComponent<PipeInteraction>().pipeComplete == false)
+            {
+                pipeBool = false;
+                break;
+            }
+        }
+
+        if (pipeBool == true)
+        {
+            if (GetComponent<RoomChange>() != null)
+            {
+                GetComponent<RoomChange>().canMove = true;
+            }
+            else
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
         }
     }

@@ -49,13 +49,13 @@ public class EMStateCheck : MonoBehaviour
         }
         else if (current_active == 3)
         {
-            if (music_on_button.active == true)
+            if (music_on_button.activeInHierarchy == true)
             {
                 EventSystem.current.SetSelectedGameObject(music_on_button);
                 last_active = 1;
                 Debug.Log("State 1");
             }
-            if (music_off_button.active == true)
+            if (music_off_button.activeInHierarchy == true)
             {
                 EventSystem.current.SetSelectedGameObject(music_off_button);
                 last_active = 2;

@@ -6,24 +6,29 @@ public class PressurePlateDoor1 : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject pad1;
-    public GameObject pad2;
-    public bool padBool1;
-    public bool padBool2;
+    public GameObject[] pads;
     public Sprite openDoor;
     public Sprite closedDoor;
 
     public WorldSounds audioManager;
+
+    bool padsActive;
     bool open = false;
 
     // Update is called once per frame
     void Update()
     {
-        padBool1 = pad1.GetComponent<PressurePad>().IsActive;
-        padBool2 = pad2.GetComponent<PressurePad>().IsActive;
-
+        padsActive = true;
+        foreach (var pad in pads)
+        {
+            if (!pad.GetComponent<PressurePad>().IsActive)
+            {
+                padsActive = false;
+                break;
+            }
+        }
         
-        if(padBool1 == true && padBool2 == true)
+        if(padsActive == true)
         {
             //door is open
             if (!open)
@@ -31,14 +36,30 @@ public class PressurePlateDoor1 : MonoBehaviour
                 audioManager.PlayDoorOpenSound();
                 open = true;
             }
-            this.GetComponent<RoomChange>().canMove = true;
+
+            if (GetComponent<RoomChange>() != null)
+            {
+                GetComponent<RoomChange>().canMove = true;
+            }
+            else
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
             this.GetComponent<SpriteRenderer>().sprite = openDoor;
         }
         else
         {
             //door is closed
             open = false;
-            this.GetComponent<RoomChange>().canMove = false;
+
+            if (GetComponent<RoomChange>() != null)
+            {
+                GetComponent<RoomChange>().canMove = false;
+            }
+            else
+            {
+                GetComponent<BoxCollider2D>().enabled = true;
+            }
             this.GetComponent<SpriteRenderer>().sprite = closedDoor;
         }
     }

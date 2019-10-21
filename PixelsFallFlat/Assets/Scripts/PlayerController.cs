@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public Vector2 playerVelocity;
 
-    string hAxis = "P1Horizontal";
-    string vAxis = "P1Vertical";
+    string hAxis;
+    string vAxis;
 
     bool armsOut = false;
     bool dead = false;
@@ -38,11 +38,8 @@ public class PlayerController : MonoBehaviour
 
         playerBody = GetComponent<Rigidbody2D>();
 
-        if (thisPlayer == Player.Player2)
-        {
-            hAxis = "P2Horizontal";
-            vAxis = "P2Vertical";
-        }
+        hAxis = thisPlayer + "Horizontal";
+        vAxis = thisPlayer + "Vertical";
 
         pWeight = GetComponent<Rigidbody2D>().mass;
     }
@@ -78,67 +75,31 @@ public class PlayerController : MonoBehaviour
         if (armsOut)
         {
             GetComponent<CapsuleCollider2D>().enabled = true;
-            //GetComponent<BoxCollider2D>().offset = new Vector2(0,-0.005f); - Disabled due to physics bugs
-            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f, 0.13f);- Disabled due to physics bugs
         }
         else if (!armsOut)
         {
             GetComponent<CapsuleCollider2D>().enabled = false;
-            //GetComponent<BoxCollider2D>().offset = new Vector2(0f,-0.038f);- Disabled due to physics bugs
-            //GetComponent<BoxCollider2D>().size = new Vector2(0.14f,0.065f);- Disabled due to physics bugs
         }
     }
 
     void ArmControl() 
     {
-        switch (thisPlayer)
+
+        if (Input.GetButtonDown(thisPlayer + "Grab"))
         {
-            case Player.Player1:
-                if (Input.GetButtonDown("P1Grab"))
-                {
-                    GetComponent<SpriteRenderer>().sprite = armedPlayer;
-                    armsOut = true;
-                }
-                else if (Input.GetButtonUp("P1Grab"))
-                {
-                    GetComponent<SpriteRenderer>().sprite = basePlayer;
-                    armsOut = false;
-                    GetComponent<Rigidbody2D>().mass = pWeight;
+            GetComponent<SpriteRenderer>().sprite = armedPlayer;
+            armsOut = true;
+        }
+        else if (Input.GetButtonUp(thisPlayer + "Grab"))
+        {
+            GetComponent<SpriteRenderer>().sprite = basePlayer;
+            armsOut = false;
+            GetComponent<Rigidbody2D>().mass = pWeight;
 
-                    if (grabbed && !dead)
-                    {
-                        grabbed.transform.SetParent(null);
-                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                        grabbed = null;
-                    }       
-                }
-                break;
-
-            case Player.Player2:
-                if (Input.GetButtonDown("P2Grab"))
-                {
-                    GetComponent<SpriteRenderer>().sprite = armedPlayer;
-                    armsOut = true;
-                }
-                else if (Input.GetButtonUp("P2Grab"))
-                {
-                    GetComponent<SpriteRenderer>().sprite = basePlayer;
-                    armsOut = false;
-                    GetComponent<Rigidbody2D>().mass = pWeight;
-
-                    if (grabbed && !dead)
-                    {
-                        grabbed.transform.SetParent(null);
-                        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-                        grabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                        grabbed = null;
-                    }
-                }
-                break;
-           
-            default:
-                break;
+            if (grabbed && !dead)
+            {
+                DropItem();
+            }       
         }
     }
 
@@ -205,11 +166,8 @@ public class PlayerController : MonoBehaviour
 
         if (grabbed != null)
         {
-            grabbed.transform.SetParent(null);
-            grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
-            grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbed.GetComponent<RespawnObject>().Respawn();
-            grabbed = null;
+            DropItem();
         }
         transform.position = spawnPoint.transform.position;
         transform.rotation = spawnPoint.transform.rotation;
@@ -217,5 +175,13 @@ public class PlayerController : MonoBehaviour
         audioManager.PlayRespawnSound();
         yield return new WaitForSeconds(waitTime);
         Respawn();
+    }
+
+    public void DropItem()
+    {
+        grabbed.transform.SetParent(null);
+        grabbed.transform.GetComponent<Rigidbody2D>().useFullKinematicContacts = false;
+        grabbed.GetComponent<Rigidbody2D>().isKinematic = false;
+        grabbed = null;
     }
 }

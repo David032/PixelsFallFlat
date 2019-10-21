@@ -18,18 +18,8 @@ public class AudioController : MonoBehaviour
     {
         player = GetComponent<AudioSource>();
         playerVector = GetComponent<PlayerController>().playerVelocity;
-
-        switch (pNum)
-        {
-            case PlayerController.Player.Player1:
-                grabButton = "P1Grab";
-                break;
-            case PlayerController.Player.Player2:
-                grabButton = "P2Grab";
-                break;
-            default:
-                break;
-        }
+        grabButton = pNum + "Grab";
+         
     }
 
     private void LateUpdate()

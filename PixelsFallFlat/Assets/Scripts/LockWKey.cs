@@ -15,18 +15,17 @@ public class LockWKey : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.gameObject.tag == "Key")
-        //{
-
-        //}
-        if (collision.gameObject == key || collision.gameObject.name == "key(Clone)" || collision.gameObject.name == "key")
+        if (!doorIsOpen)
         {
-            //Locked Door open
-            Destroy(collision.gameObject);
-            audioManager.PlayUnlockSound();
-            //Destroy(this.gameObject);
-            gameObject.GetComponent<SpriteRenderer>().sprite = keyLockWithKey;
-            doorIsOpen = true;
+            if (collision.gameObject == key || collision.gameObject.name == "key(Clone)" || collision.gameObject.name == "key")
+            {
+                //Locked Door open
+                Destroy(collision.gameObject);
+                audioManager.PlayUnlockSound();
+                //Destroy(this.gameObject);
+                gameObject.GetComponent<SpriteRenderer>().sprite = keyLockWithKey;
+                doorIsOpen = true;
+            }
         }
     }
 }

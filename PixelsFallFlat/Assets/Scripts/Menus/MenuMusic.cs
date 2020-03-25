@@ -11,8 +11,8 @@ public class MenuMusic : MonoBehaviour
 
     void Update()
     {
-        float h = Input.GetAxis("P1Vertical");
-        float e = Input.GetAxis("P1Grab");
+        float h = Input.GetAxis("Player1Vertical");
+        float e = Input.GetAxis("Player1Grab");
 
         if (h != 0)
         {
